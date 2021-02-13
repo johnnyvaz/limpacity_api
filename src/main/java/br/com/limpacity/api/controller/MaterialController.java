@@ -7,17 +7,16 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @AllArgsConstructor
 @Tag(name = "MaterialController", description = "Cadastra os tipos de material ou resíduos recicláveis")
 @RequestMapping(value = "/api/v1/material")
-@Repository
 public class MaterialController {
 
     @Autowired
@@ -29,5 +28,16 @@ public class MaterialController {
         return this.materialService.create(material);
     }
 
+    @GetMapping
+    @Operation(description = "Busca os materiais cadastrados")
+    public List<MaterialDTO> findAll() throws Exception {
+        return materialService.findAll();
+    }
 
+    @PutMapping("{id}")
+    @Operation(description = "Altera um material")
+    public MaterialDTO updateMaterial(@PathVariable("id") Long id,
+                                      @RequestBody MaterialDTO material){
+        return this.materialService.updateMaterial(id, material);
+    }
 }

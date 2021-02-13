@@ -23,6 +23,7 @@ import javax.persistence.*;
 public class MaterialModel {
 
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String descricao;
