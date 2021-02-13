@@ -1,0 +1,44 @@
+spring:
+  profiles:
+    active: ${ENV:hml}
+  application:
+    name: LimpacityApi
+  datasource:
+    hikari:
+      minimum-idle: ${minimum-idle:5}
+      idle-timeout: ${idle-timeout:10000}
+      connectionTimeout: ${idle-timeout:10000}
+      poolName: SpringBootJPAHikariCP
+    url: jdbc:mysql://${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    type: com.zaxxer.hikari.HikariDataSource
+  jpa:
+    open-in-view: false
+    show-sql: ${LOG_SQL:true}
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: false
+        use_sql: true
+        dialect: org.hibernate.dialect.MySQL55Dialect
+        proc:
+          param_null_passing:true
+        naming:
+          physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      javax:
+        persistence.query.timeout: ${QUERY_TIMEOUT:10000}
+        persistence.lock.timeout: ${LOCK_TIMEOUT:3000}
+
+springdoc:
+  version: '@project.version@'
+  api-docs:
+    groups:
+      enabled: false
+    swagger-ui:
+      path: /swagger-ui.html
+      display-request-duration: true
+      groups-order: DESC
+      operationsSorter: method
+      disable-swagger-default-url: true

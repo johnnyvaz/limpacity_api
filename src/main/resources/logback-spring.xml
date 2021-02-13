@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<include resource="org/springframework/boot/logging/logback/base.xml" />
+	
+	<springProperty scope="context" name="environment" source="spring.profiles.active" />
+	
+	<springProperty scope="context" name="app" source="spring.application.name" />
+
+	<springProperty scope="context" name="JPASHOWSQL" source="spring.jpa.show-sql" />
+		
+	<springProperty scope="context" name="version" source="info.build.version" />
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+      <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+         <Pattern>%d{yyyy-MM-dd_HH:mm:ss.SSS} %logger{36} %-5level %msg %n</Pattern>
+      </encoder>
+    </appender>
+
+	<logger name="org.springframework.cache" level="TRACE" additivity="false">
+		<appender-ref ref="STDOUT" />
+	</logger>
+	
+	<root level="ERROR" additivity="false">   	
+	 <appender-ref ref="STDOUT" />
+	</root>
+
+	<root level="INFO" additivity="false">
+		<appender-ref ref="STDOUT" />
+	</root>
+
+</configuration>
