@@ -39,4 +39,6 @@ public class UsuarioModel {
     @Column(name="update_date")
     private Date updateDate;
 
+    @Column(name="active", columnDefinition = "boolean default true",nullable = false)
+    private Boolean active;
 }

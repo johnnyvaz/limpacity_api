@@ -7,11 +7,11 @@ import br.com.limpacity.api.model.MaterialModel;
 import br.com.limpacity.api.repository.MaterialRepository;
 import br.com.limpacity.api.service.MaterialService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -36,15 +36,13 @@ public class MaterialServiceImpl implements MaterialService {
     }
 
     @Override
-    public List<MaterialDTO> findAll() throws Exception {
-        final List<MaterialModel> result = materialRepository.findAll();
+    public List<MaterialDTO> findAllAndActive() throws Exception {
+        final List<MaterialModel> result = materialRepository.findAllAndActive();
 
         if(result.isEmpty()){
             throw new Exception(); //todo: criar exception personalizada
         }
-
         return MaterialConverter.toMaterialList(result);
-
     }
 
     @Override
@@ -77,4 +75,15 @@ public class MaterialServiceImpl implements MaterialService {
                 .updateDate(new Date())
                 .build();
     }
+
+    @Override
+    public Object inactiveMaterial(Long id) {
+        var opMaterial = this.materialRepository.findById(id)
+                .orElseThrow(()-> new MaterialIdNotFoundException(id));
+        opMaterial.setUpdateDate(new Date());
+        opMaterial.setActive(false);
+        this.materialRepository.save(opMaterial);
+        return id;
+    }
+
 }

@@ -18,5 +18,6 @@ public class MaterialDTO {
     String possuiColeta;
     String notificaColeta;
     String respColeta;
+    Boolean active;
 
 }

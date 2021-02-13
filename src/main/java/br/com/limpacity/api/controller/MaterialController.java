@@ -7,9 +7,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
-
+import org.apache.log4j.Logger;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -18,6 +17,8 @@ import java.util.List;
 @Tag(name = "MaterialController", description = "Cadastra os tipos de material ou resíduos recicláveis")
 @RequestMapping(value = "/api/v1/material")
 public class MaterialController {
+
+    private final Logger logger = Logger.getLogger(MaterialController.class);
 
     @Autowired
     private final MaterialService materialService;
@@ -31,7 +32,7 @@ public class MaterialController {
     @GetMapping
     @Operation(description = "Busca os materiais cadastrados")
     public List<MaterialDTO> findAll() throws Exception {
-        return materialService.findAll();
+        return materialService.findAllAndActive();
     }
 
     @PutMapping("{id}")
@@ -39,5 +40,14 @@ public class MaterialController {
     public MaterialDTO updateMaterial(@PathVariable("id") Long id,
                                       @RequestBody MaterialDTO material){
         return this.materialService.updateMaterial(id, material);
+    }
+
+    @DeleteMapping("{id}")
+    @Operation(description = "Exclui um material")
+    public Object inactiveMaterial(@PathVariable("id") Long id){
+        String usuario = "sistema";
+        logger.info(" Material id " + id + " excluido pelo usuário " + usuario);
+        this.materialService.inactiveMaterial(id);
+        return id;
     }
 }

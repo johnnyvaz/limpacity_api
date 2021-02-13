@@ -23,6 +23,7 @@ public class MaterialConverter {
                 .possuiColeta(mat.getPossuiColeta())
                 .notificaColeta(mat.getNotificaColeta())
                 .respColeta(mat.getRespColeta())
+                .active(mat.getActive())
                 .build();
     }
 }
