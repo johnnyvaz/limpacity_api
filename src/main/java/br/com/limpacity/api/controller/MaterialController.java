@@ -1,5 +1,7 @@
 package br.com.limpacity.api.controller;
 
+import br.com.limpacity.api.controller.base.BaseController;
+import br.com.limpacity.api.controller.base.ResponseBodyDTO;
 import br.com.limpacity.api.dto.MaterialDTO;
 import br.com.limpacity.api.model.MaterialModel;
 import br.com.limpacity.api.service.MaterialService;
@@ -7,6 +9,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.apache.log4j.Logger;
 import javax.validation.Valid;
@@ -16,7 +20,7 @@ import java.util.List;
 @AllArgsConstructor
 @Tag(name = "MaterialController", description = "Cadastra os tipos de material ou resíduos recicláveis")
 @RequestMapping(value = "/api/v1/material")
-public class MaterialController {
+public class MaterialController extends BaseController {
 
     private final Logger logger = Logger.getLogger(MaterialController.class);
 
@@ -31,8 +35,14 @@ public class MaterialController {
 
     @GetMapping
     @Operation(description = "Busca os materiais cadastrados")
-    public List<MaterialDTO> findAll() throws Exception {
-        return materialService.findAllAndActive();
+    public ResponseEntity<ResponseBodyDTO<MaterialModel>> findAll() throws Exception {
+        return buildResponseBody(materialService.findAllAndActive(), HttpStatus.OK);
+    }
+
+    @GetMapping("{descricao}")
+    @Operation(description = "Busca um material cadastrado")
+    public List<MaterialDTO> findByName(@PathVariable("descricao") String descricao) {
+        return materialService.findByNameAndActive(descricao);
     }
 
     @PutMapping("{id}")

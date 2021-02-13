@@ -3,6 +3,7 @@ package br.com.limpacity.api.service.impl;
 import br.com.limpacity.api.converter.MaterialConverter;
 import br.com.limpacity.api.dto.MaterialDTO;
 import br.com.limpacity.api.exception.MaterialIdNotFoundException;
+import br.com.limpacity.api.exception.MaterialNotFoundException;
 import br.com.limpacity.api.model.MaterialModel;
 import br.com.limpacity.api.repository.MaterialRepository;
 import br.com.limpacity.api.service.MaterialService;
@@ -11,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -32,15 +32,16 @@ public class MaterialServiceImpl implements MaterialService {
                 .notificaColeta(dto.getNotificaColeta())
                 .respColeta(dto.getRespColeta())
                 .creationDate(new Date())
+                .active(true)
                 .build();
     }
 
     @Override
-    public List<MaterialDTO> findAllAndActive() throws Exception {
+    public List<MaterialDTO> findAllAndActive() {
         final List<MaterialModel> result = materialRepository.findAllAndActive();
 
         if(result.isEmpty()){
-            throw new Exception(); //todo: criar exception personalizada
+            throw new MaterialNotFoundException();
         }
         return MaterialConverter.toMaterialList(result);
     }
@@ -84,6 +85,16 @@ public class MaterialServiceImpl implements MaterialService {
         opMaterial.setActive(false);
         this.materialRepository.save(opMaterial);
         return id;
+    }
+
+    @Override
+    public List<MaterialDTO> findByNameAndActive(String descricao) {
+        final List<MaterialModel> result = this.materialRepository.findByNameAndActive(descricao);
+        if(result.isEmpty()){
+            throw new MaterialNotFoundException();
+
+        }
+        return MaterialConverter.toMaterialList(result);
     }
 
 }

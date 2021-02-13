@@ -15,4 +15,6 @@ public interface MaterialService {
     MaterialDTO updateMaterial(Long id, MaterialDTO material);
 
     Object inactiveMaterial(Long id);
+
+    List<MaterialDTO> findByNameAndActive(String descricao);
 }
