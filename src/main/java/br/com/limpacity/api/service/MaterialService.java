@@ -2,7 +2,6 @@ package br.com.limpacity.api.service;
 
 import br.com.limpacity.api.dto.MaterialDTO;
 import br.com.limpacity.api.model.MaterialModel;
-import br.com.limpacity.api.model.UsuarioModel;
 
 import java.util.List;
 

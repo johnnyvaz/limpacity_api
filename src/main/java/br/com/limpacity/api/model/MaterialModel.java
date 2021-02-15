@@ -6,8 +6,9 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 import org.springframework.data.annotation.CreatedDate;
-import java.util.Date;
+
 import javax.persistence.*;
+import java.util.Date;
 
 @Audited
 @Data
