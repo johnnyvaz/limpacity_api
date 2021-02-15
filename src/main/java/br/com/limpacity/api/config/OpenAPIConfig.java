@@ -39,4 +39,6 @@ public class OpenAPIConfig {
                         .bearerFormat("JWT")
                         .type(SecurityScheme.Type.HTTP);
     }
+
+
 }
