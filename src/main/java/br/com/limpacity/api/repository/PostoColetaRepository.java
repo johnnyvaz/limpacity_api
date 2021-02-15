@@ -13,7 +13,7 @@ public interface PostoColetaRepository extends JpaRepository<PostoColetaModel, L
 
     @Query(" select m from PostoColetaModel m " +
             " where m.active = true ")
-    List<PostoColetaModel> findAllAndSendQueue();
+    List<PostoColetaModel> findAllAndActive();
 
     @Query(" select m from PostoColetaModel m " +
             " where m.active = true " +

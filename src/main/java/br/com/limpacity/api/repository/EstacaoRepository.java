@@ -13,7 +13,7 @@ public interface EstacaoRepository extends JpaRepository<EstacaoModel, Long> {
 
     @Query(" select m from EstacaoModel m " +
             " where m.active = true ")
-    List<EstacaoModel> findAllAndSendQueue();
+    List<EstacaoModel> findAllAndActive();
 
     @Query(" select m from EstacaoModel m " +
             " where m.active = true " +
