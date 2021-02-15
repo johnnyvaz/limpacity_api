@@ -14,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.apache.log4j.Logger;
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 @AllArgsConstructor
@@ -29,8 +28,8 @@ public class MaterialController extends BaseController {
 
     @PostMapping
     @Operation(description = "Insere um novo material reciclável")
-    public MaterialModel postMaterial(@Valid @RequestBody MaterialDTO material) {
-        return this.materialService.create(material);
+    public ResponseEntity<ResponseBodyDTO<MaterialModel>> postMaterial(@Valid @RequestBody MaterialDTO material) {
+        return buildResponseBody(materialService.create(material), HttpStatus.OK);
     }
 
     @GetMapping
@@ -41,23 +40,22 @@ public class MaterialController extends BaseController {
 
     @GetMapping("{descricao}")
     @Operation(description = "Busca um material cadastrado")
-    public List<MaterialDTO> findByName(@PathVariable("descricao") String descricao) {
-        return materialService.findByNameAndActive(descricao);
+    public ResponseEntity<ResponseBodyDTO<MaterialModel>> findByName(@PathVariable("descricao") String descricao) {
+        return buildResponseBody(materialService.findByNameAndActive(descricao), HttpStatus.OK);
     }
 
     @PutMapping("{id}")
     @Operation(description = "Altera um material")
-    public MaterialDTO updateMaterial(@PathVariable("id") Long id,
+    public ResponseEntity<ResponseBodyDTO<MaterialModel>> updateMaterial(@PathVariable("id") Long id,
                                       @RequestBody MaterialDTO material){
-        return this.materialService.updateMaterial(id, material);
+        return buildResponseBody(materialService.updateMaterial(id, material), HttpStatus.CREATED);
     }
 
     @DeleteMapping("{id}")
     @Operation(description = "Exclui um material")
-    public Object inactiveMaterial(@PathVariable("id") Long id){
+    public ResponseEntity<ResponseBodyDTO<MaterialModel>> inactiveMaterial(@PathVariable("id") Long id){
         String usuario = "sistema";
         logger.info(" Material id " + id + " excluido pelo usuário " + usuario);
-        this.materialService.inactiveMaterial(id);
-        return id;
+        return  buildResponseBody(materialService.inactiveMaterial(id), HttpStatus.OK);
     }
 }
