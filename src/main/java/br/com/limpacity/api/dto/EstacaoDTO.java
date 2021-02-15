@@ -23,5 +23,6 @@ public class EstacaoDTO {
     String cidade;
     String estado;
     Date creationDate;
+    Boolean active;
 
 }
