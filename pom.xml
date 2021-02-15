@@ -9,12 +9,15 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>br.com.limpacity</groupId>
-    <artifactId>api</artifactId>
-    <version>0.0.1</version>
-    <name>api</name>
+    <artifactId>limpacity-api</artifactId>
+    <version>0.1.0</version>
+    <name>limpacity-api</name>
     <description>micro serviço para gestao de residuos</description>
     <properties>
         <java.version>11</java.version>
+        <spring.version>5.2.3.RELEASE</spring.version>
+        <hibernate.version>5.4.1.Final</hibernate.version>
+        <slf4j.version>1.7.25</slf4j.version>
     </properties>
     <dependencies>
         <dependency>
@@ -33,7 +36,21 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.9.1</version>
+        </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
