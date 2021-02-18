@@ -1,0 +1,48 @@
+server:
+  port: ${PORT:8080}
+  servlet:
+    contextPath: /limpacity
+security:
+  jwt:
+    prefix: Bearer
+    secret: test
+spring:
+  main:
+    banner-mode: "off"
+  profiles:
+    active: test
+  h2:
+    console:
+      enabled: true
+      path: /h2
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        format_sql: false
+        use_sql: false
+        show_sql: false
+
+logging:
+  level:
+    org:
+      springframework: INFO
+      hibernate:
+        SQL: off
+        engine:
+          transaction: debug
+    main: OFF
+    root: OFF
+
+timezone: ${TIMEZONE:America/Sao_Paulo}
+
+info:
+  app:
+    environment: test
+  build:
+    artifact: '@project.artifactId@'
+    name: '@project.name@'
+    description: '@project.description@'
+    version: '@project.version@'

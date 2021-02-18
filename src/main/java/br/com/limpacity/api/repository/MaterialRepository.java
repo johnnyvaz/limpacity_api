@@ -21,5 +21,4 @@ public interface MaterialRepository extends JpaRepository<MaterialModel, Long> {
             " and m.id = :descricao ")
     List<MaterialModel> findByNameAndActive(@Param("descricao") String descricao);
 
-
 }
