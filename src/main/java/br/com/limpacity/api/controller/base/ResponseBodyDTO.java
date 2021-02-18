@@ -1,5 +1,6 @@
 package br.com.limpacity.api.controller.base;
 
+import br.com.limpacity.api.controller.base.error.ErrorDTO;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.io.Serializable;

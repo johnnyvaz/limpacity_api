@@ -1,5 +1,6 @@
 package br.com.limpacity.api.controller.base;
 
+import br.com.limpacity.api.controller.base.error.ErrorCodeEnum;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 

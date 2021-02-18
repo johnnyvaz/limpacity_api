@@ -1,4 +1,4 @@
-package br.com.limpacity.api.controller.base;
+package br.com.limpacity.api.controller.base.error;
 
 import java.io.Serializable;
 

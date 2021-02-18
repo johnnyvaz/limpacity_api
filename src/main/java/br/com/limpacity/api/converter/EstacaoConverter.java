@@ -2,14 +2,15 @@ package br.com.limpacity.api.converter;
 
 import br.com.limpacity.api.dto.EstacaoDTO;
 import br.com.limpacity.api.model.EstacaoModel;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Component
 public class EstacaoConverter {
 
     private EstacaoConverter(){
-
     }
 
     public static List<EstacaoDTO> toEstacaoList(List<EstacaoModel> estacao){
