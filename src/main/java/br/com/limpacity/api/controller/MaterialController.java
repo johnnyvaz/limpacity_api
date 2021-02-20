@@ -2,7 +2,7 @@ package br.com.limpacity.api.controller;
 
 import br.com.limpacity.api.controller.base.BaseController;
 import br.com.limpacity.api.controller.base.ResponseBodyDTO;
-import br.com.limpacity.api.dto.MaterialDTO;
+import br.com.limpacity.api.dto.material.MaterialDTO;
 import br.com.limpacity.api.model.MaterialModel;
 import br.com.limpacity.api.service.MaterialService;
 import io.swagger.v3.oas.annotations.Operation;

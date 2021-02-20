@@ -1,4 +1,4 @@
-package br.com.limpacity.api.dto;
+package br.com.limpacity.api.dto.material;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,8 +1,6 @@
-package br.com.limpacity.api.controller;
+package br.com.limpacity.api.integration.controller;
 
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class MaterialControllerTest {
 

@@ -1,7 +1,7 @@
 package br.com.limpacity.api.service.impl;
 
 import br.com.limpacity.api.converter.MaterialConverter;
-import br.com.limpacity.api.dto.MaterialDTO;
+import br.com.limpacity.api.dto.material.MaterialDTO;
 import br.com.limpacity.api.exception.MaterialIdNotFoundException;
 import br.com.limpacity.api.exception.MaterialNotFoundException;
 import br.com.limpacity.api.model.MaterialModel;

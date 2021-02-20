@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.UUID;
 
 @RestController
 @AllArgsConstructor
@@ -34,29 +35,35 @@ public class PostoColetaController extends BaseController {
     }
 
     @GetMapping
-    @Operation(description = "Busca os materiais cadastrados")
+    @Operation(description = "Busca os postos de coleta cadastrados")
     public ResponseEntity<ResponseBodyDTO<PostoColetaModel>> findAll() throws Exception {
         return buildResponseBody(postoColetaService.findAllAndActive(), HttpStatus.OK);
     }
 
-    @GetMapping("{qr_code}")
+    @GetMapping(value = "/tudo")
+    @Operation(description = "Busca os postos de coleta cadastrados")
+    public ResponseEntity<ResponseBodyDTO<PostoColetaModel>> findTudo() throws Exception {
+        return buildResponseBody(postoColetaService.findTudo(), HttpStatus.OK);
+    }
+
+    @GetMapping("{uuid}")
     @Operation(description = "Busca um postocoleta cadastrado")
-    public ResponseEntity<ResponseBodyDTO<PostoColetaModel>> findByName(@PathVariable("qr_code") String qr_code) {
-        return buildResponseBody(postoColetaService.findByNameAndActive(qr_code), HttpStatus.OK);
+    public ResponseEntity<ResponseBodyDTO<PostoColetaModel>> findByName(@PathVariable("uuid") UUID uuid) {
+        return buildResponseBody(postoColetaService.findByUuidAndActive(uuid), HttpStatus.OK);
     }
 
-    @PutMapping("{id}")
+    @PutMapping("{uuid}")
     @Operation(description = "Altera um postocoleta")
-    public ResponseEntity<ResponseBodyDTO<PostoColetaModel>> updatePostoColeta(@PathVariable("id") Long id,
+    public ResponseEntity<ResponseBodyDTO<PostoColetaModel>> updatePostoColeta(@PathVariable("uuid") UUID uuid,
                                       @RequestBody PostoColetaDTO postocoleta){
-        return buildResponseBody(postoColetaService.updatePostoColeta(id, postocoleta), HttpStatus.CREATED);
+        return buildResponseBody(postoColetaService.updatePostoColeta(uuid, postocoleta), HttpStatus.CREATED);
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("{uuid}")
     @Operation(description = "Exclui um postocoleta")
-    public ResponseEntity<ResponseBodyDTO<PostoColetaModel>> inactivePostoColeta(@PathVariable("id") Long id){
+    public ResponseEntity<ResponseBodyDTO<PostoColetaModel>> inactivePostoColeta(@PathVariable("uuid") UUID uuid){
         String usuario = "sistema";
-        logger.info(" PostoColeta id " + id + " excluido pelo usuário " + usuario);
-        return  buildResponseBody(postoColetaService.inactivePostoColeta(id), HttpStatus.OK);
+        logger.info(" PostoColeta id " + uuid + " excluido pelo usuário " + usuario);
+        return  buildResponseBody(postoColetaService.inactivePostoColeta(uuid), HttpStatus.OK);
     }
 }

@@ -60,7 +60,6 @@ public class EstacaoServiceImpl implements EstacaoService {
 
     private static EstacaoDTO toEstacao(EstacaoModel est){
         return EstacaoDTO.builder()
-                .id(est.getId())
                 .descricao(est.getDescricao())
                 .cep(est.getCep())
                 .endereco(est.getEndereco())
@@ -75,7 +74,6 @@ public class EstacaoServiceImpl implements EstacaoService {
     private EstacaoModel toUpdate(Long id, EstacaoDTO est, Date creationDate) {
         return EstacaoModel.builder()
                 .id(id)
-                .id(est.getId())
                 .descricao(est.getDescricao())
                 .cep(est.getCep())
                 .endereco(est.getEndereco())

@@ -9,6 +9,7 @@ import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Audited
 @Data
@@ -37,6 +38,10 @@ public class EstacaoModel {
     private String complemento;
     private String cidade;
     private String estado;
+
+    @ToString.Exclude
+    @OneToMany(mappedBy="estacaoId",fetch = FetchType.LAZY ,cascade=CascadeType.REFRESH)
+    private Set<PostoColetaModel> postoColeta;
 
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)

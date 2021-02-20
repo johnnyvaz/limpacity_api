@@ -1,6 +1,7 @@
 package br.com.limpacity.api.converter;
 
 import br.com.limpacity.api.dto.PostoColetaDTO;
+import br.com.limpacity.api.dto.material.MaterialDTO;
 import br.com.limpacity.api.model.PostoColetaModel;
 
 import java.util.List;
@@ -18,14 +19,12 @@ public class PostoColetaConverter {
 
     private static PostoColetaDTO toPostoColeta(PostoColetaModel post){
         return PostoColetaDTO.builder()
-                .id(post.getId())
-                .qr_code(post.getQr_code())
+                .material(MaterialDTO.builder().id(post.getMaterialId().getId()).build())
                 .observacao(post.getObservacao())
                 .especificacao(post.getEspecificacao())
                 .statusInstalacao(post.getStatusInstalacao())
                 .latitude(post.getLatitude())
                 .longitude(post.getLongitude())
-                .active(post.getActive())
                 .build();
     }
 }

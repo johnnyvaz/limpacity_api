@@ -22,6 +22,7 @@ import javax.validation.Valid;
 @RequestMapping(value = "/api/v1/estacao")
 public class EstacaoController extends BaseController {
 
+    public static final String API_ESTACAO = "/api/v1/estacao";
     private final Logger logger = Logger.getLogger(EstacaoController.class);
 
     @Autowired

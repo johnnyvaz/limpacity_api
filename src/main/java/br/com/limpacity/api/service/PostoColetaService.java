@@ -4,6 +4,7 @@ import br.com.limpacity.api.dto.PostoColetaDTO;
 import br.com.limpacity.api.model.PostoColetaModel;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface PostoColetaService {
 
@@ -11,9 +12,11 @@ public interface PostoColetaService {
 
     List<PostoColetaDTO> findAllAndActive() throws Exception;
 
-    PostoColetaDTO updatePostoColeta(Long id, PostoColetaDTO material);
+    List<PostoColetaModel> findTudo();
 
-    Object inactivePostoColeta(Long id);
+    PostoColetaDTO updatePostoColeta(UUID uuid, PostoColetaDTO material);
 
-    List<PostoColetaDTO> findByNameAndActive(String descricao);
+    Object inactivePostoColeta(UUID uuid);
+
+    List<PostoColetaDTO> findByUuidAndActive(UUID uuid);
 }

@@ -1,5 +1,7 @@
 package br.com.limpacity.api.dto;
 
+import br.com.limpacity.api.dto.material.MaterialDTO;
+import br.com.limpacity.api.dto.material.MaterialIdDTO;
 import br.com.limpacity.api.enums.StatusInstalacao;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,14 +16,12 @@ import java.util.Date;
 @AllArgsConstructor
 public class PostoColetaDTO {
 
-    private Long id;
-    String qr_code;
+    MaterialDTO material;
+    EstacaoDTO estacao;
     String observacao;
     String especificacao;
     StatusInstalacao statusInstalacao;
     String latitude;
     String longitude;
-    Date creationDate;
-    Boolean active;
 
 }

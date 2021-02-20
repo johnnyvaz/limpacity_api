@@ -1,6 +1,6 @@
 package br.com.limpacity.api.converter;
 
-import br.com.limpacity.api.dto.MaterialDTO;
+import br.com.limpacity.api.dto.material.MaterialDTO;
 import br.com.limpacity.api.model.MaterialModel;
 
 import java.util.List;

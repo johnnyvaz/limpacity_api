@@ -9,7 +9,10 @@ import org.hibernate.envers.Audited;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import java.io.Serializable;
 import java.util.Date;
+import java.util.UUID;
 
 @Audited
 @Data
@@ -22,15 +25,23 @@ import java.util.Date;
 @AuditTable(value = "postocoleta_audit")
 @DynamicInsert
 @DynamicUpdate
-public class PostoColetaModel {
+public class PostoColetaModel implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(columnDefinition = "BINARY(16)")
+    private UUID uuid;
 
-//    private EstacaoModel estacaoId;
-    private String qr_code;
-//    private MaterialModel materialId;
+    @ManyToOne
+    @JoinColumn(name = "material_id",
+            foreignKey = @ForeignKey(name = "material_id_fk"))
+    private MaterialModel materialId;
+
+    @ManyToOne
+    @JoinColumn(name="estacao_id",
+            foreignKey = @ForeignKey(name = "estacao_id_fk"))
+    private EstacaoModel estacaoId;
+
     private String observacao;
     private String especificacao;
     private StatusInstalacao statusInstalacao;

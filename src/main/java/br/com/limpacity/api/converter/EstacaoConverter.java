@@ -19,7 +19,6 @@ public class EstacaoConverter {
 
     private static EstacaoDTO toEstacao(EstacaoModel est){
         return EstacaoDTO.builder()
-                .id(est.getId())
                 .descricao(est.getDescricao())
                 .cep(est.getCep())
                 .endereco(est.getEndereco())
@@ -28,7 +27,6 @@ public class EstacaoConverter {
                 .complemento(est.getComplemento())
                 .cidade(est.getCidade())
                 .estado(est.getEstado())
-                .active(est.getActive())
                 .build();
     }
 }

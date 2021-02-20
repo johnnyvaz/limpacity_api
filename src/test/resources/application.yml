@@ -7,6 +7,11 @@ security:
     prefix: Bearer
     secret: test
 spring:
+  rabbitmq:
+    events:
+      wcs-inbound:
+        exchangeName: ${RABBIT-WCS-INBOUND-EXCHANGE}
+        queueRoutingKey: ${RABBIT-WCS-INBOUND-QUEUE-RK}
   main:
     banner-mode: "off"
   profiles:
@@ -46,3 +51,7 @@ info:
     name: '@project.name@'
     description: '@project.description@'
     version: '@project.version@'
+
+cache:
+  expireAfterWrite: ${CACHE_TIME_EXPIRE:1}
+

@@ -1,8 +1,13 @@
+server:
+  port: ${PORT:9001}
+  servlet:
+    contextPath: /limpacity
+
 spring:
   profiles:
-    active: ${ENV:hml}
+    active: ${ENV:prod}
   application:
-    name: LimpacityApi
+    name: limpacity
   datasource:
     hikari:
       minimum-idle: ${minimum-idle:5}
@@ -20,7 +25,7 @@ spring:
       ddl-auto: update
     properties:
       hibernate:
-        format_sql: false
+        format_sql: true
         use_sql: true
         dialect: org.hibernate.dialect.MySQL55Dialect
         proc:
@@ -30,15 +35,38 @@ spring:
       javax:
         persistence.query.timeout: ${QUERY_TIMEOUT:10000}
         persistence.lock.timeout: ${LOCK_TIMEOUT:3000}
+  security:
+    user:
+      name: ${SECURITY-USERNAME}
+      password: ${SECURITY-PASSWORD}
+security:
+  jwt:
+    uri: "/**"
+    prefix: ${JWT_PREFIX}
+    secret: ${JWT_SECRET}
+
+info:
+  app:
+    encoding: '@project.build.sourceEncoding@'
+  java:
+    source: '@java.version@'
+    target: '@java.version@'
+  build:
+    artifact: '@project.artifactId@'
+    name: '@project.name@'
+    description: '@project.description@'
+    version: '@project.version@'
 
 springdoc:
   version: '@project.version@'
   api-docs:
     groups:
       enabled: false
-    swagger-ui:
-      path: /swagger-ui.html
-      display-request-duration: true
-      groups-order: DESC
-      operationsSorter: method
-      disable-swagger-default-url: true
+  swagger-ui:
+    path: /swagger-ui.html
+    display-request-duration: true
+    groups-order: DESC
+    operationsSorter: method
+    disable-swagger-default-url: false
+
+timezone: ${TIMEZONE:America/Sao_Paulo}
