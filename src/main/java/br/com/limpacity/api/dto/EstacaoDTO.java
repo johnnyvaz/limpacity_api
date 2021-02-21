@@ -13,6 +13,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class EstacaoDTO {
 
+    Long id;
     String descricao;
     String cep;
     String endereco;
@@ -21,6 +22,6 @@ public class EstacaoDTO {
     String complemento;
     String cidade;
     String estado;
-    Date creationDate;
+    PostoColetaDTO postoColeta;
 
 }

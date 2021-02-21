@@ -2,6 +2,7 @@ package br.com.limpacity.api.service.impl;
 
 import br.com.limpacity.api.converter.EstacaoConverter;
 import br.com.limpacity.api.dto.EstacaoDTO;
+import br.com.limpacity.api.dto.PostoColetaDTO;
 import br.com.limpacity.api.exception.EstacaoNotFoundException;
 import br.com.limpacity.api.model.EstacaoModel;
 import br.com.limpacity.api.repository.EstacaoRepository;
@@ -41,7 +42,7 @@ public class EstacaoServiceImpl implements EstacaoService {
 
     @Override
     public List<EstacaoDTO> findAllAndActive() {
-        final List<EstacaoModel> result = estacaoRepository.findAllAndActive();
+        final List<EstacaoModel> result = estacaoRepository.findEstacaoAndPosto();
 
         if(result.isEmpty()){
             throw new EstacaoNotFoundException();

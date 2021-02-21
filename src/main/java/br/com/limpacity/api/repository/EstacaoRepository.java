@@ -7,13 +7,18 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface EstacaoRepository extends JpaRepository<EstacaoModel, Long> {
 
-    @Query(" select m from EstacaoModel m " +
-            " where m.active = true ")
-    List<EstacaoModel> findAllAndActive();
+//    @Query(" select m from EstacaoModel m " +
+//            " where m.active = true ")
+//    List<EstacaoModel> findAllAndActive();
+
+    @Query(" select e from EstacaoModel e" +
+            " join e.postoColeta p")
+    List<EstacaoModel> findEstacaoAndPosto();
 
     @Query(" select m from EstacaoModel m " +
             " where m.active = true " +

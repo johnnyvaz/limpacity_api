@@ -46,7 +46,6 @@ public class PostoColetaServiceImpl implements PostoColetaService {
         if(result.isEmpty()){
             throw new PostoColetaNotFoundException();
         }
-        System.out.println(" ------------>>>> " + result);
         return PostoColetaConverter.toPostoColetaList(result);
     }
 
