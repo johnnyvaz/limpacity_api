@@ -2,6 +2,7 @@ package br.com.limpacity.api.service.impl;
 
 import br.com.limpacity.api.converter.PostoColetaConverter;
 import br.com.limpacity.api.dto.PostoColetaDTO;
+import br.com.limpacity.api.dto.material.MaterialDTO;
 import br.com.limpacity.api.exception.PostoColetaNotFoundException;
 import br.com.limpacity.api.model.MaterialModel;
 import br.com.limpacity.api.model.PostoColetaModel;
@@ -29,6 +30,7 @@ public class PostoColetaServiceImpl implements PostoColetaService {
     private PostoColetaModel toDto(PostoColetaDTO post) {
         return PostoColetaModel.builder()
                 .materialId(MaterialModel.builder().id(post.getMaterial().getId()).build())
+//                .estacaoId()
                 .observacao(post.getObservacao())
                 .especificacao(post.getEspecificacao())
                 .statusInstalacao(post.getStatusInstalacao())
@@ -50,6 +52,7 @@ public class PostoColetaServiceImpl implements PostoColetaService {
     }
 
     public List<PostoColetaModel> findTudo() {
+
         return postoColetaRepository.findTudo();
     }
 
@@ -69,19 +72,17 @@ public class PostoColetaServiceImpl implements PostoColetaService {
                 .statusInstalacao(post.getStatusInstalacao())
                 .latitude(post.getLatitude())
                 .longitude(post.getLongitude())
-//                .active(post.getActive())
                 .build();
     }
 
     private PostoColetaModel toUpdate(UUID uuid, PostoColetaDTO post, Date creationDate) {
         return PostoColetaModel.builder()
-                .uuid(UUID.randomUUID())
+                .uuid(UUID.randomUUID()) // se for update deve pegar o uuid do parametro
                 .observacao(post.getObservacao())
                 .especificacao(post.getEspecificacao())
                 .statusInstalacao(post.getStatusInstalacao())
                 .latitude(post.getLatitude())
                 .longitude(post.getLongitude())
-//                .active(post.getActive())
                 .creationDate(creationDate)
                 .updateDate(new Date())
                 .build();

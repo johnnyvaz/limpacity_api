@@ -40,7 +40,9 @@ public class EstacaoModel {
     private String estado;
 
     @ToString.Exclude
-    @OneToMany(mappedBy="estacaoId",fetch = FetchType.LAZY ,cascade=CascadeType.REFRESH)
+    @OneToMany(mappedBy="estacaoId",
+            fetch = FetchType.LAZY ,
+            cascade=CascadeType.REFRESH)
     private Set<PostoColetaModel> postoColeta;
 
     @CreatedDate

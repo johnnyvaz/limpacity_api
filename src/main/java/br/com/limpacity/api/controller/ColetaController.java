@@ -36,7 +36,7 @@ public class ColetaController extends BaseController {
     @GetMapping
     @Operation(description = "Busca os materiais cadastrados")
     public ResponseEntity<ResponseBodyDTO<ColetaModel>> findAll() throws Exception {
-        return buildResponseBody(coletaService.findAllAndSendQueue(), HttpStatus.OK);
+        return buildResponseBody(coletaService.findAllAndIntegrationStatus(), HttpStatus.OK);
     }
 
     @PutMapping("{id}")

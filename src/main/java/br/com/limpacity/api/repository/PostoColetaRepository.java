@@ -16,7 +16,9 @@ public interface PostoColetaRepository extends JpaRepository<PostoColetaModel, U
             " where m.active = true ")
     List<PostoColetaModel> findAllAndActive();
 
-    @Query(" select m from PostoColetaModel m ")
+    @Query(" select m from PostoColetaModel m " +
+            " left join m.estacaoId e " +
+            " left join m.materialId t")
     List<PostoColetaModel> findTudo();
 
     @Query(" select m from PostoColetaModel m " +

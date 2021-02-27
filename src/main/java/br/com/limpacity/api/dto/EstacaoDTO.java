@@ -22,6 +22,6 @@ public class EstacaoDTO {
     String complemento;
     String cidade;
     String estado;
-    PostoColetaDTO postoColeta;
+
 
 }

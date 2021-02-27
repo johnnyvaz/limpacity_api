@@ -12,7 +12,7 @@ import java.util.List;
 public interface ColetaRepository extends JpaRepository<ColetaModel, Long> {
 
     @Query(" select m from ColetaModel m " +
-            " where m.sendQueue = true ")
-    List<ColetaModel> findAllAndSendQueue();
+            " where m.integrationStatus = 'N' ")
+    List<ColetaModel> findAllAndIntegrationStatus();
 
 }

@@ -17,7 +17,7 @@ public interface EstacaoRepository extends JpaRepository<EstacaoModel, Long> {
 //    List<EstacaoModel> findAllAndActive();
 
     @Query(" select e from EstacaoModel e" +
-            " join e.postoColeta p")
+            " left join e.postoColeta p")
     List<EstacaoModel> findEstacaoAndPosto();
 
     @Query(" select m from EstacaoModel m " +

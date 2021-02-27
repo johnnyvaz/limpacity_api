@@ -27,14 +27,14 @@ public class ColetaServiceImpl implements ColetaService {
     private ColetaModel toDto(ColetaDTO dto) {
         return ColetaModel.builder()
                 .quantidade(dto.getQuantidade())
-                .sendQueue(dto.getSendQueue())
+                .integrationStatus(dto.getIntegrationStatus())
                 .creationDate(new Date())
                 .build();
     }
 
     @Override
-    public List<ColetaDTO> findAllAndSendQueue() {
-        final List<ColetaModel> result = coletaRepository.findAllAndSendQueue();
+    public List<ColetaDTO> findAllAndIntegrationStatus() {
+        final List<ColetaModel> result = coletaRepository.findAllAndIntegrationStatus();
 
         if(result.isEmpty()){
             throw new ColetaNotFoundException();
@@ -55,7 +55,7 @@ public class ColetaServiceImpl implements ColetaService {
         return ColetaDTO.builder()
                 .id(dto.getId())
                 .quantidade(dto.getQuantidade())
-                .sendQueue(dto.getSendQueue())
+                .integrationStatus(dto.getIntegrationStatus())
                 .build();
     }
 
@@ -63,7 +63,7 @@ public class ColetaServiceImpl implements ColetaService {
         return ColetaModel.builder()
                 .id(id)
                 .quantidade(dto.getQuantidade())
-                .sendQueue(dto.getSendQueue())
+                .integrationStatus(dto.getIntegrationStatus())
                 .creationDate(creationDate)
                 .updateDate(new Date())
                 .build();
@@ -74,7 +74,7 @@ public class ColetaServiceImpl implements ColetaService {
         var opMaterial = this.coletaRepository.findById(id)
                 .orElseThrow(()-> new ColetaNotFoundException());
         opMaterial.setUpdateDate(new Date());
-        opMaterial.setSendQueue(true);
+        opMaterial.setIntegrationStatus("N");
         this.coletaRepository.save(opMaterial);
         return id;
     }

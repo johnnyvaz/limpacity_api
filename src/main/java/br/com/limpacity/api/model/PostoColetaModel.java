@@ -4,19 +4,21 @@ import br.com.limpacity.api.enums.StatusInstalacao;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
 @Audited
 @Data
-@EqualsAndHashCode(of = "id")
+@EqualsAndHashCode(of = "uuid")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -32,14 +34,15 @@ public class PostoColetaModel implements Serializable {
     @Column(columnDefinition = "BINARY(16)")
     private UUID uuid;
 
+    @ToString.Exclude
     @ManyToOne
-    @JoinColumn(name = "material_id",
-            foreignKey = @ForeignKey(name = "material_id_fk"))
+    @JoinColumn(name = "material_id", foreignKey = @ForeignKey(name = "material_id_fk"))
     private MaterialModel materialId;
 
+    @ToString.Exclude
     @ManyToOne
-    @JoinColumn(name="estacao_id",
-            foreignKey = @ForeignKey(name = "estacao_id_fk"))
+    @NotFound(action = NotFoundAction.IGNORE)
+    @JoinColumn(name="estacao_id", foreignKey = @ForeignKey(name = "estacao_id_fk"))
     private EstacaoModel estacaoId;
 
     private String observacao;

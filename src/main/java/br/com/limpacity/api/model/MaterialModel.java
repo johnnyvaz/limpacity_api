@@ -9,6 +9,7 @@ import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Audited
 @Data
@@ -31,6 +32,12 @@ public class MaterialModel {
     private String possuiColeta;
     private String notificaColeta;
     private String respColeta;
+
+//    @ToString.Exclude
+//    @OneToMany(mappedBy="materialId",
+//            fetch = FetchType.LAZY ,
+//            cascade=CascadeType.REFRESH)
+//    private Set<PostoColetaModel> postoColeta;
 
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)

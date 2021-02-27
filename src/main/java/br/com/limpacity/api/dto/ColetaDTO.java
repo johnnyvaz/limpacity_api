@@ -18,7 +18,7 @@ public class ColetaDTO {
 
     Long quantidade;
 
-    Boolean sendQueue;
+    String integrationStatus;
 
     Date creationDate;
 

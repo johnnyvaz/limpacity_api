@@ -9,7 +9,7 @@ public interface ColetaService {
 
     ColetaModel create(ColetaDTO coleta);
 
-    List<ColetaDTO> findAllAndSendQueue() throws Exception;
+    List<ColetaDTO> findAllAndIntegrationStatus() throws Exception;
 
     ColetaDTO updateColeta(Long id, ColetaDTO coleta);
 

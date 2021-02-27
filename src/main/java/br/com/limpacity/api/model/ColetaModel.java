@@ -8,9 +8,9 @@ import org.hibernate.envers.Audited;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
-@Audited
 @Data
 @EqualsAndHashCode(of = "id")
 @Builder
@@ -18,7 +18,6 @@ import java.util.Date;
 @AllArgsConstructor
 @Entity
 @Table(name="coleta")
-@AuditTable(value = "coleta_audit")
 @DynamicInsert
 @DynamicUpdate
 public class ColetaModel {
@@ -39,6 +38,11 @@ public class ColetaModel {
     @Column(name="update_date")
     private Date updateDate;
 
-    @Column(name="active", columnDefinition = "boolean default false",nullable = false)
-    private Boolean sendQueue;
+    private String error;
+
+    private LocalDateTime integrationDate;
+
+    private String integrationStatus;
+
+    private String integrationDescription;
 }
