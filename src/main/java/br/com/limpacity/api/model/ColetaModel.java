@@ -6,13 +6,15 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.integration.annotation.Default;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.UUID;
 
 @Data
-@EqualsAndHashCode(of = "id")
+@EqualsAndHashCode(of = "uuid")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,9 +25,9 @@ import java.util.Date;
 public class ColetaModel {
 
     @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "uuid")
+    private UUID uuid;
+
     private Long quantidade;
 //    private PostoColetaModel postoColeta;
 
@@ -38,11 +40,16 @@ public class ColetaModel {
     @Column(name="update_date")
     private Date updateDate;
 
-    private String error;
+    private String integration_error;
 
     private LocalDateTime integrationDate;
 
     private String integrationStatus;
 
     private String integrationDescription;
+
+    private Integer notificaEmail;
+
+    private Integer notificaPush;
+
 }

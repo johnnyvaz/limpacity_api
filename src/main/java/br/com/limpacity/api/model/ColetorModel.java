@@ -17,20 +17,16 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="coletador")
-@AuditTable(value = "coletador_audit")
+@Table(name="coletor")
+@AuditTable(value = "coletor_audit")
 @DynamicInsert
 @DynamicUpdate
-public class ColetadorModel {
+public class ColetorModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
-
-    //private Usuario usuario;
-
-    //private MaterialModel materiaisColetados;
 
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)

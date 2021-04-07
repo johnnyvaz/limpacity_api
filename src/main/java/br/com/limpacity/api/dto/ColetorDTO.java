@@ -12,7 +12,7 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ColetadorDTO {
+public class ColetorDTO {
 
     private Long id;
 

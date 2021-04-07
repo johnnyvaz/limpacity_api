@@ -23,8 +23,9 @@ public class OpenAPIConfig {
                 .components(new Components()
                         .addSecuritySchemes(API_KEY, apiKeySecuritySchema()))
                 .info(new Info()
-                        .title("Limpa City")
-                        .description("API para Gestão de Resíduos")
+                        .title("Limpa City API")
+                        .description("API para consulta e gravação dos dados diretamente no banco " +
+                                "de dados, de forma síncrona ")
                         .version(appVersion))
                 .security(Collections.singletonList(new SecurityRequirement().addList(API_KEY)));
     }

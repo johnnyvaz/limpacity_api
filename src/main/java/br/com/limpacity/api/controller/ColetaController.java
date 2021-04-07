@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.UUID;
 
 @RestController
 @AllArgsConstructor
@@ -39,18 +40,18 @@ public class ColetaController extends BaseController {
         return buildResponseBody(coletaService.findAllAndIntegrationStatus(), HttpStatus.OK);
     }
 
-    @PutMapping("{id}")
+    @PutMapping("{uuid}")
     @Operation(description = "Altera um coleta")
-    public ResponseEntity<ResponseBodyDTO<ColetaModel>> updateColeta(@PathVariable("id") Long id,
+    public ResponseEntity<ResponseBodyDTO<ColetaModel>> updateColeta(@PathVariable("uuid") UUID uuid,
                                       @RequestBody ColetaDTO coleta){
-        return buildResponseBody(coletaService.updateColeta(id, coleta), HttpStatus.CREATED);
+        return buildResponseBody(coletaService.updateColeta(uuid, coleta), HttpStatus.CREATED);
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("{uuid}")
     @Operation(description = "Exclui um coleta")
-    public ResponseEntity<ResponseBodyDTO<ColetaModel>> inactiveColeta(@PathVariable("id") Long id){
+    public ResponseEntity<ResponseBodyDTO<ColetaModel>> inactiveColeta(@PathVariable("uuid") UUID uuid){
         String usuario = "sistema";
-        logger.info(" Coleta id " + id + " excluido pelo usuário " + usuario);
-        return  buildResponseBody(coletaService.inactiveColeta(id), HttpStatus.OK);
+        logger.info(" Coleta id " + uuid + " excluido pelo usuário " + usuario);
+        return  buildResponseBody(coletaService.inactiveColeta(uuid), HttpStatus.OK);
     }
 }

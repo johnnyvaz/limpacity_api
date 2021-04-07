@@ -4,6 +4,7 @@ import br.com.limpacity.api.dto.ColetaDTO;
 import br.com.limpacity.api.model.ColetaModel;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface ColetaService {
 
@@ -11,8 +12,8 @@ public interface ColetaService {
 
     List<ColetaDTO> findAllAndIntegrationStatus() throws Exception;
 
-    ColetaDTO updateColeta(Long id, ColetaDTO coleta);
+    ColetaDTO updateColeta(UUID uuid, ColetaDTO coleta);
 
-    Object inactiveColeta(Long id);
+    Object inactiveColeta(UUID uuid);
 
 }

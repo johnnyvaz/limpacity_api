@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -20,8 +21,7 @@ public class ColetaServiceImpl implements ColetaService {
 
     @Override
     public ColetaModel create(ColetaDTO material) {
-        ColetaModel mat = coletaRepository.save(toDto(material));
-        return mat;
+        return coletaRepository.save(toDto(material));
     }
 
     private ColetaModel toDto(ColetaDTO dto) {
@@ -42,26 +42,26 @@ public class ColetaServiceImpl implements ColetaService {
         return ColetaConverter.toColetaList(result);
     }
 
-    @Override
-    public ColetaDTO updateColeta(Long id, ColetaDTO material) {
-        var opColeta = this.coletaRepository.findById(id)
-                .orElseThrow(()-> new ColetaNotFoundException());
+
+    public ColetaDTO updateColeta(UUID uuid, ColetaDTO material) {
+        var opColeta = this.coletaRepository.findByUuid(uuid)
+                .orElseThrow(ColetaNotFoundException::new);
         Date creationDate =  opColeta.getCreationDate();
-        ColetaModel mat = coletaRepository.save(toUpdate(id, material, creationDate));
+        ColetaModel mat = coletaRepository.save(toUpdate(uuid, material, creationDate));
         return toColeta(mat);
     }
 
     private static ColetaDTO toColeta(ColetaModel dto){
         return ColetaDTO.builder()
-                .id(dto.getId())
+                .uuid(dto.getUuid())
                 .quantidade(dto.getQuantidade())
                 .integrationStatus(dto.getIntegrationStatus())
                 .build();
     }
 
-    private ColetaModel toUpdate(Long id, ColetaDTO dto, Date creationDate) {
+    private ColetaModel toUpdate(UUID uuid, ColetaDTO dto, Date creationDate) {
         return ColetaModel.builder()
-                .id(id)
+                .uuid(uuid)
                 .quantidade(dto.getQuantidade())
                 .integrationStatus(dto.getIntegrationStatus())
                 .creationDate(creationDate)
@@ -69,14 +69,13 @@ public class ColetaServiceImpl implements ColetaService {
                 .build();
     }
 
-    @Override
-    public Object inactiveColeta(Long id) {
-        var opMaterial = this.coletaRepository.findById(id)
-                .orElseThrow(()-> new ColetaNotFoundException());
+    public Object inactiveColeta(UUID uuid) {
+        var opMaterial = this.coletaRepository.findByUuid(uuid)
+                .orElseThrow(ColetaNotFoundException::new);
         opMaterial.setUpdateDate(new Date());
         opMaterial.setIntegrationStatus("N");
         this.coletaRepository.save(opMaterial);
-        return id;
+        return uuid;
     }
 
 }

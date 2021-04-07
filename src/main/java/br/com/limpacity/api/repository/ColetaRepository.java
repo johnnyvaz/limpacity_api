@@ -7,6 +7,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Repository
 public interface ColetaRepository extends JpaRepository<ColetaModel, Long> {
@@ -15,4 +17,7 @@ public interface ColetaRepository extends JpaRepository<ColetaModel, Long> {
             " where m.integrationStatus = 'N' ")
     List<ColetaModel> findAllAndIntegrationStatus();
 
+    @Query(" select m from ColetaModel m " +
+            " where m.uuid = :uuid ")
+    Optional<ColetaModel> findByUuid(UUID uuid);
 }
