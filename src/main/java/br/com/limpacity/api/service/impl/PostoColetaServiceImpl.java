@@ -29,7 +29,7 @@ public class PostoColetaServiceImpl implements PostoColetaService {
 
     private PostoColetaModel toDto(PostoColetaDTO post) {
         return PostoColetaModel.builder()
-                .materialId(MaterialModel.builder().id(post.getMaterial().getId()).build())
+//                .materialId(MaterialModel.builder().id(post.getMaterial().getId()).build())
 //                .estacaoId()
                 .observacao(post.getObservacao())
                 .especificacao(post.getEspecificacao())

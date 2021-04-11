@@ -2,6 +2,7 @@ package br.com.limpacity.api.controller;
 
 import br.com.limpacity.api.controller.base.BaseController;
 import br.com.limpacity.api.controller.base.ResponseBodyDTO;
+import br.com.limpacity.api.dto.ColetaQrcodeDTO;
 import br.com.limpacity.api.dto.ColetaDTO;
 import br.com.limpacity.api.model.ColetaModel;
 import br.com.limpacity.api.service.ColetaService;
@@ -19,7 +20,7 @@ import java.util.UUID;
 
 @RestController
 @AllArgsConstructor
-@Tag(name = "ColetaController", description = " (verificar o que faz sentido) para solicitação de coleta")
+@Tag(name = "ColetaController", description = " Repositório das coletas solicitadas")
 @RequestMapping(value = "/api/v1/coleta")
 public class ColetaController extends BaseController {
 
@@ -29,13 +30,20 @@ public class ColetaController extends BaseController {
     private final ColetaService coletaService;
 
     @PostMapping
-    @Operation(description = "Insere um novo coleta reciclável")
+    @Operation(description = "Insere uma nova solicitação de coleta")
     public ResponseEntity<ResponseBodyDTO<ColetaModel>> postColeta(@Valid @RequestBody ColetaDTO coleta) {
         return buildResponseBody(coletaService.create(coleta), HttpStatus.OK);
     }
 
+    @PostMapping("/qrcode/{coletor}/{estacao}/{material}")
+    @Operation(description = "Insere uma nova solicitação de coleta vindo da leitura do QRCode " +
+            "com coletor vinculado, Estação e Material")
+    public ResponseEntity<ResponseBodyDTO<ColetaModel>> postColetaQrcode(@Valid @RequestBody ColetaQrcodeDTO coleta) {
+        return buildResponseBody(coletaService.createQrcode(coleta), HttpStatus.OK);
+    }
+
     @GetMapping
-    @Operation(description = "Busca os materiais cadastrados")
+    @Operation(description = "Busca as coletas disponíveis para serem coletadas")
     public ResponseEntity<ResponseBodyDTO<ColetaModel>> findAll() throws Exception {
         return buildResponseBody(coletaService.findAllAndIntegrationStatus(), HttpStatus.OK);
     }

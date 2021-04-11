@@ -20,9 +20,7 @@ public class MaterialConverter {
         return MaterialDTO.builder()
                 .id(mat.getId())
                 .descricao(mat.getDescricao())
-                .possuiColeta(mat.getPossuiColeta())
-                .notificaColeta(mat.getNotificaColeta())
-                .respColeta(mat.getRespColeta())
+
                 .active(mat.getActive())
                 .build();
     }

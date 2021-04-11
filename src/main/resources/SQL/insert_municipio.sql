@@ -3450,7 +3450,7 @@ INSERT INTO municipio (cod_mun, habilitado, nome_municipio, uf_cod_uf) VALUES (3
 INSERT INTO municipio (cod_mun, habilitado, nome_municipio, uf_cod_uf) VALUES (3515905, 0, 'Floreal', 35);
 INSERT INTO municipio (cod_mun, habilitado, nome_municipio, uf_cod_uf) VALUES (3516002, 0, 'Flórida Paulista', 35);
 INSERT INTO municipio (cod_mun, habilitado, nome_municipio, uf_cod_uf) VALUES (3516101, 0, 'Florínia', 35);
-INSERT INTO municipio (cod_mun, habilitado, nome_municipio, uf_cod_uf) VALUES (3516200, 0, 'Franca', 35);
+
 INSERT INTO municipio (cod_mun, habilitado, nome_municipio, uf_cod_uf) VALUES (3516309, 0, 'Francisco Morato', 35);
 INSERT INTO municipio (cod_mun, habilitado, nome_municipio, uf_cod_uf) VALUES (3516408, 0, 'Franco da Rocha', 35);
 INSERT INTO municipio (cod_mun, habilitado, nome_municipio, uf_cod_uf) VALUES (3516507, 0, 'Gabriel Monteiro', 35);

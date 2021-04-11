@@ -3,14 +3,12 @@ package br.com.limpacity.api.model;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.envers.AuditTable;
-import org.hibernate.envers.Audited;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
-@Audited
 @Data
 @EqualsAndHashCode(of = "id")
 @Builder
@@ -18,7 +16,6 @@ import java.util.Date;
 @AllArgsConstructor
 @Entity
 @Table(name="coletor")
-@AuditTable(value = "coletor_audit")
 @DynamicInsert
 @DynamicUpdate
 public class ColetorModel {
@@ -27,6 +24,14 @@ public class ColetorModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
+
+    @ManyToMany(mappedBy = "coletor", cascade = CascadeType.ALL)
+    private List<ColetaModel> coleta;
+
+    private Long totalSolicitacoes;
+
+    private Long totalRealizado;
+
 
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)

@@ -17,7 +17,7 @@ INSERT INTO uf (cod_uf, habilitado, nome_uf) VALUES (29, 0,'Bahia');
 INSERT INTO uf (cod_uf, habilitado, nome_uf) VALUES (31, 0,'Minas Gerais');
 INSERT INTO uf (cod_uf, habilitado, nome_uf) VALUES (32, 0,'Espírito Santo');
 INSERT INTO uf (cod_uf, habilitado, nome_uf) VALUES (33, 0,'Rio de Janeiro');
-INSERT INTO uf (cod_uf, habilitado, nome_uf) VALUES (35, 0,'São Paulo');
+
 INSERT INTO uf (cod_uf, habilitado, nome_uf) VALUES (41, 0,'Paraná');
 INSERT INTO uf (cod_uf, habilitado, nome_uf) VALUES (42, 0,'Santa Catarina');
 INSERT INTO uf (cod_uf, habilitado, nome_uf) VALUES (43, 0,'Rio Grande do Sul');

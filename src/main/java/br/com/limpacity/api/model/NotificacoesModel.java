@@ -1,43 +1,36 @@
 package br.com.limpacity.api.model;
 
 import lombok.*;
+import net.minidev.json.annotate.JsonIgnore;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.envers.AuditTable;
-import org.hibernate.envers.Audited;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.Set;
+import java.util.UUID;
 
-@Audited
 @Data
 @EqualsAndHashCode(of = "id")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="material")
-@AuditTable(value = "material_audit")
+@Table(name="notificacoes")
 @DynamicInsert
 @DynamicUpdate
-public class MaterialModel {
+public class NotificacoesModel {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String descricao;
-    private String grupo;
-    private Integer tempoLimiteAceite;
 
+//    @JsonIgnore
+//    @ManyToOne
+//    @JoinColumn(name = "coleta_id")
+//    private ColetaModel coleta;
 
-    @ToString.Exclude
-    @OneToMany(mappedBy="materialId",
-            fetch = FetchType.LAZY ,
-            cascade=CascadeType.REFRESH)
-    private Set<PostoColetaModel> postoColeta;
+    private String notificaEmail;
 
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
@@ -48,6 +41,4 @@ public class MaterialModel {
     @Column(name="update_date")
     private Date updateDate;
 
-    @Column(name="active", columnDefinition = "boolean default true",nullable = false)
-    private Boolean active;
 }

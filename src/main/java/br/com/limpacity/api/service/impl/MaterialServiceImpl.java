@@ -27,9 +27,7 @@ public class MaterialServiceImpl implements MaterialService {
     private MaterialModel toDto(MaterialDTO dto) {
         return MaterialModel.builder()
                 .descricao(dto.getDescricao())
-                .possuiColeta(dto.getPossuiColeta())
-                .notificaColeta(dto.getNotificaColeta())
-                .respColeta(dto.getRespColeta())
+
                 .creationDate(new Date())
                 .active(true)
                 .build();
@@ -58,9 +56,7 @@ public class MaterialServiceImpl implements MaterialService {
         return MaterialDTO.builder()
                 .id(mat.getId())
                 .descricao(mat.getDescricao())
-                .possuiColeta(mat.getPossuiColeta())
-                .notificaColeta(mat.getNotificaColeta())
-                .respColeta(mat.getRespColeta())
+
                 .build();
     }
 
@@ -68,9 +64,7 @@ public class MaterialServiceImpl implements MaterialService {
         return MaterialModel.builder()
                 .id(id)
                 .descricao(dto.getDescricao())
-                .possuiColeta(dto.getPossuiColeta())
-                .notificaColeta(dto.getNotificaColeta())
-                .respColeta(dto.getRespColeta())
+
                 .creationDate(creationDate)
                 .updateDate(new Date())
                 .build();

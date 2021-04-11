@@ -20,7 +20,7 @@ public class PostoColetaConverter {
 
     private static PostoColetaDTO toPostoColeta(PostoColetaModel post){
         return PostoColetaDTO.builder()
-                .material(MaterialDTO.builder().id(post.getMaterialId().getId()).build())
+//                .material(MaterialDTO.builder().id(post.getMaterialId().getId()).build())
                 .observacao(post.getObservacao())
                 .especificacao(post.getEspecificacao())
                 .statusInstalacao(post.getStatusInstalacao())

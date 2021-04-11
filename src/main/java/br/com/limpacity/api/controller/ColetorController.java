@@ -29,7 +29,7 @@ public class ColetorController extends BaseController {
 
     @PostMapping
     @Operation(description = "Insere um novo coletor reciclável")
-    public ResponseEntity<ResponseBodyDTO<ColetorModel>> postColetador(@Valid @RequestBody ColetorDTO coletador) {
+    public ResponseEntity<ResponseBodyDTO<ColetorModel>> postColetor(@Valid @RequestBody ColetorDTO coletador) {
         return buildResponseBody(coletorService.create(coletador), HttpStatus.OK);
     }
 

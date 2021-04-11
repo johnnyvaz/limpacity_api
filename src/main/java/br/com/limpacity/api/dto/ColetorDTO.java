@@ -16,6 +16,9 @@ public class ColetorDTO {
 
     private Long id;
 
+    @NotNull(message = "CPF requerido")
+    private Long cpf;
+
     @NotNull(message = "nome requerido")
     String nome;
 

@@ -2,6 +2,7 @@ package br.com.limpacity.api.service.impl;
 
 import br.com.limpacity.api.converter.ColetaConverter;
 import br.com.limpacity.api.dto.ColetaDTO;
+import br.com.limpacity.api.dto.ColetaQrcodeDTO;
 import br.com.limpacity.api.exception.ColetaNotFoundException;
 import br.com.limpacity.api.model.ColetaModel;
 import br.com.limpacity.api.repository.ColetaRepository;
@@ -24,10 +25,25 @@ public class ColetaServiceImpl implements ColetaService {
         return coletaRepository.save(toDto(material));
     }
 
+    @Override
+    public ColetaModel createQrcode(ColetaQrcodeDTO coleta) {
+        return null;
+    }
+
     private ColetaModel toDto(ColetaDTO dto) {
         return ColetaModel.builder()
+                .uuid(dto.getUuid())
+                .nomeSolicitante(dto.getNomeSolicitante())
+                .telefone(dto.getTelefone())
+                .email(dto.getEmail())
+
+                .cep(dto.getCep())
+                .endereco(dto.getEndereco())
+                .numero(dto.getNumero())
+                .municipio(dto.getMunicipio())
+                .estado(dto.getEstado())
+                .pais(dto.getPais())
                 .quantidade(dto.getQuantidade())
-                .integrationStatus(dto.getIntegrationStatus())
                 .creationDate(new Date())
                 .build();
     }
@@ -54,16 +70,34 @@ public class ColetaServiceImpl implements ColetaService {
     private static ColetaDTO toColeta(ColetaModel dto){
         return ColetaDTO.builder()
                 .uuid(dto.getUuid())
+                .nomeSolicitante(dto.getNomeSolicitante())
+                .telefone(dto.getTelefone())
+                .email(dto.getEmail())
+                .cep(dto.getCep())
+                .endereco(dto.getEndereco())
+                .numero(dto.getNumero())
+                .municipio(dto.getMunicipio())
+                .estado(dto.getEstado())
+                .pais(dto.getPais())
                 .quantidade(dto.getQuantidade())
-                .integrationStatus(dto.getIntegrationStatus())
                 .build();
     }
 
     private ColetaModel toUpdate(UUID uuid, ColetaDTO dto, Date creationDate) {
         return ColetaModel.builder()
-                .uuid(uuid)
+                .uuid(dto.getUuid())
+                .nomeSolicitante(dto.getNomeSolicitante())
+                .telefone(dto.getTelefone())
+                .email(dto.getEmail())
+                .cep(dto.getCep())
+                .endereco(dto.getEndereco())
+                .numero(dto.getNumero())
+                .municipio(dto.getMunicipio())
+                .estado(dto.getEstado())
+                .pais(dto.getPais())
                 .quantidade(dto.getQuantidade())
-                .integrationStatus(dto.getIntegrationStatus())
+                .quantidade(dto.getQuantidade())
+                .ativo(true)
                 .creationDate(creationDate)
                 .updateDate(new Date())
                 .build();
@@ -73,7 +107,7 @@ public class ColetaServiceImpl implements ColetaService {
         var opMaterial = this.coletaRepository.findByUuid(uuid)
                 .orElseThrow(ColetaNotFoundException::new);
         opMaterial.setUpdateDate(new Date());
-        opMaterial.setIntegrationStatus("N");
+        opMaterial.setAtivo(false);
         this.coletaRepository.save(opMaterial);
         return uuid;
     }

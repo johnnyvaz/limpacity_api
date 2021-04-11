@@ -20,7 +20,7 @@ public class ColetaConverter {
         return ColetaDTO.builder()
                 .uuid(mat.getUuid())
                 .quantidade(mat.getQuantidade())
-                .integrationStatus(mat.getIntegrationStatus())
+
                 .build();
     }
 }

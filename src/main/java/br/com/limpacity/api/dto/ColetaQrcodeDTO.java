@@ -5,17 +5,14 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotNull;
-import java.util.Date;
-import java.util.UUID;
-
 @Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ColetaDTO {
+public class ColetaQrcodeDTO {
 
     private String uuid;
+    private ColetorDTO coletor;
     private String nomeSolicitante;
     private String telefone;
     private String email;

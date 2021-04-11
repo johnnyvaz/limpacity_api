@@ -3,18 +3,16 @@ package br.com.limpacity.api.model;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.envers.AuditTable;
-import org.hibernate.envers.Audited;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.integration.annotation.Default;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
+import java.util.List;
 
 @Data
-@EqualsAndHashCode(of = "uuid")
+@EqualsAndHashCode(of = "id")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,12 +23,37 @@ import java.util.UUID;
 public class ColetaModel {
 
     @Id
-    @Column(name = "uuid")
-    private UUID uuid;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
+    private String uuid;
+    private String nomeSolicitante;
+    private String telefone;
+    private String email;
+
+//    @ManyToOne
+//    @JoinColumn(name = "id")
+//    private MaterialModel material;
+
+//    @OneToMany(mappedBy = "coleta")
+//    private List<NotificacoesModel> notificacoesList = new ArrayList<NotificacoesModel>();
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name="coleta_coletador",
+        joinColumns={@JoinColumn(name="coletor_id")},
+        inverseJoinColumns = {@JoinColumn(name = "coleta_id")})
+    private List<ColetorModel> coletor;
+
+    private String cep;
+    private String endereco;
+    private String numero;
+    private String municipio;
+    private String estado;
+    private String pais;
+    private Date dataLimite;
     private Long quantidade;
-//    private PostoColetaModel postoColeta;
 
+    private Boolean ativo;
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="creation_date")
@@ -39,17 +62,5 @@ public class ColetaModel {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="update_date")
     private Date updateDate;
-
-    private String integration_error;
-
-    private LocalDateTime integrationDate;
-
-    private String integrationStatus;
-
-    private String integrationDescription;
-
-    private Integer notificaEmail;
-
-    private Integer notificaPush;
 
 }
