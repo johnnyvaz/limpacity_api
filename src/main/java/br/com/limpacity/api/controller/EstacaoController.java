@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.UUID;
 
 @RestController
 @AllArgsConstructor
@@ -34,11 +35,11 @@ public class EstacaoController extends BaseController {
         return buildResponseBody(estacaoService.create(estacao), HttpStatus.OK);
     }
 
-    @GetMapping
-    @Operation(description = "Busca os materiais cadastrados")
-    public ResponseEntity<ResponseBodyDTO<EstacaoModel>> findAll() throws Exception {
-        return buildResponseBody(estacaoService.findAllAndActive(), HttpStatus.OK);
-    }
+//    @GetMapping
+//    @Operation(description = "Busca os materiais cadastrados")
+//    public ResponseEntity<ResponseBodyDTO<EstacaoModel>> findAll() throws Exception {
+//        return buildResponseBody(estacaoService.findAllAndActive(), HttpStatus.OK);
+//    }
 
     @GetMapping("{descricao}")
     @Operation(description = "Busca um estacao cadastrado")

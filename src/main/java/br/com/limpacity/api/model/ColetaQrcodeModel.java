@@ -3,14 +3,10 @@ package br.com.limpacity.api.model;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.envers.AuditTable;
-import org.hibernate.envers.Audited;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.Set;
-import java.util.UUID;
 
 @Data
 @EqualsAndHashCode(of = "id")
@@ -18,22 +14,21 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="material")
+@Table(name="coleta_qrcode")
 @DynamicInsert
 @DynamicUpdate
-public class MaterialModel {
+public class ColetaQrcodeModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String uuid;
 
-    private String descricao;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "estacao_id", foreignKey = @ForeignKey(name = "estacao_coletaqrcode_fk"))
+    private EstacaoModel estacao;
 
-//    @ToString.Exclude
-//    @OneToMany(mappedBy="materialId",
-//            fetch = FetchType.LAZY ,
-//            cascade=CascadeType.REFRESH)
-//    private Set<PostoColetaModel> postoColeta;
+    private Boolean ativo;
 
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
@@ -44,6 +39,4 @@ public class MaterialModel {
     @Column(name="update_date")
     private Date updateDate;
 
-    @Column(name="active", columnDefinition = "boolean default true",nullable = false)
-    private Boolean active;
 }

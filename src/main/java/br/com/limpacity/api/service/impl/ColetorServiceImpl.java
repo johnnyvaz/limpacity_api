@@ -20,8 +20,7 @@ public class ColetorServiceImpl implements ColetorService {
 
     @Override
     public ColetorModel create(ColetorDTO material) {
-        ColetorModel mat = coletorRepository.save(toDto(material));
-        return mat;
+        return coletorRepository.save(toDto(material));
     }
 
     private ColetorModel toDto(ColetorDTO dto) {
@@ -35,7 +34,6 @@ public class ColetorServiceImpl implements ColetorService {
     @Override
     public List<ColetorDTO> findAllAndActive() {
         final List<ColetorModel> result = coletorRepository.findAllAndActive();
-
         if(result.isEmpty()){
             throw new ColetorNotFoundException();
         }
@@ -44,23 +42,23 @@ public class ColetorServiceImpl implements ColetorService {
 
     @Override
     public ColetorDTO updateColetor(Long id, ColetorDTO material) {
-        var opMaterial = this.coletorRepository.findById(id)
+        ColetorModel opMaterial = this.coletorRepository.findById(id)
                 .orElseThrow(ColetorNotFoundException::new);
         Date creationDate =  opMaterial.getCreationDate();
         ColetorModel mat = coletorRepository.save(toUpdate(id, material, creationDate));
         return toColetor(mat);
     }
 
-    private static ColetorDTO toColetor(ColetorModel mat){
+    private static ColetorDTO toColetor(ColetorModel dto){
         return ColetorDTO.builder()
-                .id(mat.getId())
-                .nome(mat.getNome())
+                .id(dto.getId())
+                .nome(dto.getNome())
                 .build();
     }
 
     private ColetorModel toUpdate(Long id, ColetorDTO dto, Date creationDate) {
         return ColetorModel.builder()
-                .id(id)
+                .id(dto.getId())
                 .nome(dto.getNome())
                 .creationDate(creationDate)
                 .updateDate(new Date())
@@ -69,7 +67,7 @@ public class ColetorServiceImpl implements ColetorService {
 
     @Override
     public Object inactiveColetor(Long id) {
-        var opMaterial = this.coletorRepository.findById(id)
+        ColetorModel opMaterial = this.coletorRepository.findById(id)
                 .orElseThrow(ColetorNotFoundException::new);
         opMaterial.setUpdateDate(new Date());
         opMaterial.setActive(false);
@@ -82,7 +80,6 @@ public class ColetorServiceImpl implements ColetorService {
         final List<ColetorModel> result = this.coletorRepository.findByNameAndActive(nome);
         if(result.isEmpty()){
             throw new ColetorNotFoundException();
-
         }
         return ColetorConverter.toColetorList(result);
     }

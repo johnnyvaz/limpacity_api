@@ -22,7 +22,6 @@ public class PostoColetaConverter {
         return PostoColetaDTO.builder()
 //                .material(MaterialDTO.builder().id(post.getMaterialId().getId()).build())
                 .observacao(post.getObservacao())
-                .especificacao(post.getEspecificacao())
                 .statusInstalacao(post.getStatusInstalacao())
                 .latitude(post.getLatitude())
                 .longitude(post.getLongitude())

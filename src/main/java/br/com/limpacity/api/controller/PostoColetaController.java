@@ -46,24 +46,24 @@ public class PostoColetaController extends BaseController {
         return buildResponseBody(postoColetaService.findTudo(), HttpStatus.OK);
     }
 
-    @GetMapping("{uuid}")
+    @GetMapping("{id}")
     @Operation(description = "Busca um postocoleta cadastrado")
-    public ResponseEntity<ResponseBodyDTO<PostoColetaModel>> findByName(@PathVariable("uuid") UUID uuid) {
-        return buildResponseBody(postoColetaService.findByUuidAndActive(uuid), HttpStatus.OK);
+    public ResponseEntity<ResponseBodyDTO<PostoColetaModel>> findByName(@PathVariable("id") Long id) {
+        return buildResponseBody(postoColetaService.findByIdAndActive(id), HttpStatus.OK);
     }
 
-    @PutMapping("{uuid}")
+    @PutMapping("{id}")
     @Operation(description = "Altera um postocoleta")
-    public ResponseEntity<ResponseBodyDTO<PostoColetaModel>> updatePostoColeta(@PathVariable("uuid") UUID uuid,
+    public ResponseEntity<ResponseBodyDTO<PostoColetaModel>> updatePostoColeta(@PathVariable("id") Long id,
                                       @RequestBody PostoColetaDTO postocoleta){
-        return buildResponseBody(postoColetaService.updatePostoColeta(uuid, postocoleta), HttpStatus.CREATED);
+        return buildResponseBody(postoColetaService.updatePostoColeta(id, postocoleta), HttpStatus.CREATED);
     }
 
-    @DeleteMapping("{uuid}")
+    @DeleteMapping("{id}")
     @Operation(description = "Exclui um postocoleta")
-    public ResponseEntity<ResponseBodyDTO<PostoColetaModel>> inactivePostoColeta(@PathVariable("uuid") UUID uuid){
+    public ResponseEntity<ResponseBodyDTO<PostoColetaModel>> inactivePostoColeta(@PathVariable("id") Long id){
         String usuario = "sistema";
-        logger.info(" PostoColeta id " + uuid + " excluido pelo usuário " + usuario);
-        return  buildResponseBody(postoColetaService.inactivePostoColeta(uuid), HttpStatus.OK);
+        logger.info(" PostoColeta id " + id + " excluido pelo usuário " + usuario);
+        return  buildResponseBody(postoColetaService.inactivePostoColeta(id), HttpStatus.OK);
     }
 }

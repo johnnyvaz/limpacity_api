@@ -8,22 +8,22 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Repository
 public interface EstacaoRepository extends JpaRepository<EstacaoModel, Long> {
 
-//    @Query(" select m from EstacaoModel m " +
-//            " where m.active = true ")
-//    List<EstacaoModel> findAllAndActive();
+    @Query(" select m from EstacaoModel m " +
+            " where m.id = :id ")
+    Optional<EstacaoModel> findByUuid(@Param("id") Long id);
 
-    @Query(" select e from EstacaoModel e" +
-            " left join e.postoColeta p")
-    List<EstacaoModel> findEstacaoAndPosto();
+//    @Query(" select e from EstacaoModel e" +
+//            " left join e.postoColeta p")
+//    List<EstacaoModel> findEstacaoAndPosto();
 
     @Query(" select m from EstacaoModel m " +
             " where m.active = true " +
-            " and m.descricao = :descricao " +
-            " and m.id = :descricao ")
+            " and m.descricao = :descricao ")
     List<EstacaoModel> findByNameAndActive(@Param("descricao") String descricao);
     
 }

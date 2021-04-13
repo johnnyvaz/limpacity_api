@@ -7,6 +7,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Repository
 public interface MaterialRepository extends JpaRepository<MaterialModel, Long> {
@@ -16,9 +18,12 @@ public interface MaterialRepository extends JpaRepository<MaterialModel, Long> {
     List<MaterialModel> findAllAndActive();
 
     @Query(" select m from MaterialModel m " +
+            " where m.id = :id ")
+    Optional<MaterialModel> findByUuid(@Param("id") Long id);
+
+    @Query(" select m from MaterialModel m " +
             " where m.active = true " +
-            " and m.descricao = :descricao " +
-            " and m.id = :descricao ")
+            " and m.descricao = :descricao ")
     List<MaterialModel> findByNameAndActive(@Param("descricao") String descricao);
 
 }

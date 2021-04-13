@@ -18,7 +18,7 @@ class ApiControllerAdviceTest {
     @Test
     void shouldHandleHandleIdNotFound() {
         ResponseEntity responseEntity = apiControllerAdvice
-                .handleIdNotFoundException(new MaterialIdNotFoundException(1L));
+                .handleIdNotFoundException(new MaterialIdNotFoundException(null));
         Assertions.assertEquals(HttpStatus.BAD_REQUEST, responseEntity.getStatusCode());
         Assertions.assertNotNull(responseEntity);
     }

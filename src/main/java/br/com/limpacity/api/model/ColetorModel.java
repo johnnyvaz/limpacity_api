@@ -8,6 +8,7 @@ import org.springframework.data.annotation.CreatedDate;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Data
 @EqualsAndHashCode(of = "id")
@@ -23,10 +24,8 @@ public class ColetorModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nome;
 
-    @ManyToMany(mappedBy = "coletor", cascade = CascadeType.ALL)
-    private List<ColetaModel> coleta;
+    private String nome;
 
     private Long totalSolicitacoes;
 

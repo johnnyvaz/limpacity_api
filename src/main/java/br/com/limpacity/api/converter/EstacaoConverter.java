@@ -25,7 +25,7 @@ public class EstacaoConverter {
                 .numero(est.getNumero())
                 .bairro(est.getBairro())
                 .complemento(est.getComplemento())
-                .cidade(est.getCidade())
+                .municipio(est.getMunicipio())
                 .estado(est.getEstado())
                 .build();
     }

@@ -23,16 +23,14 @@ public class PostoColetaServiceImpl implements PostoColetaService {
 
     @Override
     public PostoColetaModel create(PostoColetaDTO postoColeta) {
-        PostoColetaModel post = postoColetaRepository.save(toDto(postoColeta));
-        return post;
+        return postoColetaRepository.save(toDto(postoColeta));
     }
 
     private PostoColetaModel toDto(PostoColetaDTO post) {
         return PostoColetaModel.builder()
 //                .materialId(MaterialModel.builder().id(post.getMaterial().getId()).build())
-//                .estacaoId()
+//                .estacaoId(post.getEstacao())
                 .observacao(post.getObservacao())
-                .especificacao(post.getEspecificacao())
                 .statusInstalacao(post.getStatusInstalacao())
                 .latitude(post.getLatitude())
                 .longitude(post.getLongitude())
@@ -57,29 +55,26 @@ public class PostoColetaServiceImpl implements PostoColetaService {
     }
 
     @Override
-    public PostoColetaDTO updatePostoColeta(UUID uuid, PostoColetaDTO postoColeta) {
-        var opPostoColeta = this.postoColetaRepository.findById(uuid)
-                .orElseThrow(()-> new PostoColetaNotFoundException());
+    public PostoColetaDTO updatePostoColeta(Long id, PostoColetaDTO postoColeta) {
+        PostoColetaModel opPostoColeta = this.postoColetaRepository.findById(id)
+                .orElseThrow(PostoColetaNotFoundException::new);
         Date creationDate =  opPostoColeta.getCreationDate();
-        PostoColetaModel mat = postoColetaRepository.save(toUpdate(uuid, postoColeta, creationDate));
+        PostoColetaModel mat = postoColetaRepository.save(toUpdate(id, postoColeta, creationDate));
         return toPostoColeta(mat);
     }
 
     private static PostoColetaDTO toPostoColeta(PostoColetaModel post){
         return PostoColetaDTO.builder()
                 .observacao(post.getObservacao())
-                .especificacao(post.getEspecificacao())
                 .statusInstalacao(post.getStatusInstalacao())
                 .latitude(post.getLatitude())
                 .longitude(post.getLongitude())
                 .build();
     }
 
-    private PostoColetaModel toUpdate(UUID uuid, PostoColetaDTO post, Date creationDate) {
+    private PostoColetaModel toUpdate(Long id, PostoColetaDTO post, Date creationDate) {
         return PostoColetaModel.builder()
-                .uuid(UUID.randomUUID()) // se for update deve pegar o uuid do parametro
                 .observacao(post.getObservacao())
-                .especificacao(post.getEspecificacao())
                 .statusInstalacao(post.getStatusInstalacao())
                 .latitude(post.getLatitude())
                 .longitude(post.getLongitude())
@@ -89,18 +84,18 @@ public class PostoColetaServiceImpl implements PostoColetaService {
     }
 
     @Override
-    public Object inactivePostoColeta(UUID uuid) {
-        var opPostoColeta = this.postoColetaRepository.findById(uuid)
-                .orElseThrow(()-> new PostoColetaNotFoundException());
+    public Object inactivePostoColeta(Long id) {
+        var opPostoColeta = this.postoColetaRepository.findById(id)
+                .orElseThrow(PostoColetaNotFoundException::new);
         opPostoColeta.setUpdateDate(new Date());
         opPostoColeta.setActive(false);
         this.postoColetaRepository.save(opPostoColeta);
-        return uuid;
+        return id;
     }
 
     @Override
-    public List<PostoColetaDTO> findByUuidAndActive(UUID uuid) {
-        final List<PostoColetaModel> result = this.postoColetaRepository.findByUuidAndActive(uuid);
+    public List<PostoColetaDTO> findByIdAndActive(Long id) {
+        final List<PostoColetaModel> result = this.postoColetaRepository.findByIdAndActive(id);
         if(result.isEmpty()){
             throw new PostoColetaNotFoundException();
         }

@@ -2,6 +2,7 @@ package br.com.limpacity.api.model;
 
 import br.com.limpacity.api.enums.StatusInstalacao;
 import lombok.*;
+import net.minidev.json.annotate.JsonIgnore;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.NotFound;
@@ -16,37 +17,37 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
-@Audited
 @Data
-@EqualsAndHashCode(of = "uuid")
+@EqualsAndHashCode(of = "id")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name="postocoleta")
-@AuditTable(value = "postocoleta_audit")
 @DynamicInsert
 @DynamicUpdate
-public class PostoColetaModel implements Serializable {
+public class PostoColetaModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(columnDefinition = "BINARY(16)")
-    private UUID uuid;
+    private Long id;
 
-    @ToString.Exclude
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "material_id", foreignKey = @ForeignKey(name = "material_id_fk"))
-    private MaterialModel materialId;
+    @JoinColumn(name = "material_id", foreignKey = @ForeignKey(name = "material_posto_fk"))
+    private MaterialModel material;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="coletor_id", foreignKey = @ForeignKey(name = "coletor_estacao_fk"))
+    private ColetorModel coletor;
 
     @ToString.Exclude
     @ManyToOne
     @NotFound(action = NotFoundAction.IGNORE)
-    @JoinColumn(name="estacao_id", foreignKey = @ForeignKey(name = "estacao_id_fk"))
-    private EstacaoModel estacaoId;
+    @JoinColumn(name="estacao_id", foreignKey = @ForeignKey(name = "estacao_posto_fk"))
+    private EstacaoModel estacao;
 
     private String observacao;
-    private String especificacao;
     private StatusInstalacao statusInstalacao;
     private String latitude;
     private String longitude;

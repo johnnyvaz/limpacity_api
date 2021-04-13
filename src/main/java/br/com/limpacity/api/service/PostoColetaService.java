@@ -14,9 +14,9 @@ public interface PostoColetaService {
 
     List<PostoColetaModel> findTudo();
 
-    PostoColetaDTO updatePostoColeta(UUID uuid, PostoColetaDTO material);
+    PostoColetaDTO updatePostoColeta(Long id, PostoColetaDTO material);
 
-    Object inactivePostoColeta(UUID uuid);
+    Object inactivePostoColeta(Long id);
 
-    List<PostoColetaDTO> findByUuidAndActive(UUID uuid);
+    List<PostoColetaDTO> findByIdAndActive(Long id);
 }

@@ -4,6 +4,7 @@ import br.com.limpacity.api.dto.material.MaterialDTO;
 import br.com.limpacity.api.model.MaterialModel;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface MaterialService {
 

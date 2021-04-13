@@ -5,24 +5,19 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class ColetaQrcodeDTO {
 
+    private Long id;
     private String uuid;
-    private ColetorDTO coletor;
-    private String nomeSolicitante;
-    private String telefone;
-    private String email;
-    private String material;
-    private String cep;
-    private String endereco;
-    private String numero;
-    private String municipio;
-    private String estado;
-    private String pais;
-    private Long quantidade;
+    private Boolean ativo;
+    private Date creationDate;
+    private Date updateDate;
+    private Long estacao_id;
 
 }

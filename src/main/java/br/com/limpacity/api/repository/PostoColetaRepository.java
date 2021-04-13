@@ -10,20 +10,18 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface PostoColetaRepository extends JpaRepository<PostoColetaModel, UUID> {
+public interface PostoColetaRepository extends JpaRepository<PostoColetaModel, Long> {
 
     @Query(" select m from PostoColetaModel m " +
             " where m.active = true ")
     List<PostoColetaModel> findAllAndActive();
 
-    @Query(" select m from PostoColetaModel m " +
-            " left join m.estacaoId e " +
-            " left join m.materialId t")
+    @Query(" select m from PostoColetaModel m ")
     List<PostoColetaModel> findTudo();
 
     @Query(" select m from PostoColetaModel m " +
             " where m.active = true " +
-            " and m.uuid = :uuid ")
-    List<PostoColetaModel> findByUuidAndActive(@Param("uuid") UUID uuid);
+            " and m.id = :id ")
+    List<PostoColetaModel> findByIdAndActive(@Param("id") Long id);
     
 }

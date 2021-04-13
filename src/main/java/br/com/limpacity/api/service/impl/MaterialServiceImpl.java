@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -56,7 +57,7 @@ public class MaterialServiceImpl implements MaterialService {
         return MaterialDTO.builder()
                 .id(mat.getId())
                 .descricao(mat.getDescricao())
-
+                .active(mat.getActive())
                 .build();
     }
 
@@ -64,7 +65,7 @@ public class MaterialServiceImpl implements MaterialService {
         return MaterialModel.builder()
                 .id(id)
                 .descricao(dto.getDescricao())
-
+                .active(dto.getActive())
                 .creationDate(creationDate)
                 .updateDate(new Date())
                 .build();
@@ -72,7 +73,8 @@ public class MaterialServiceImpl implements MaterialService {
 
     @Override
     public Object inactiveMaterial(Long id) {
-        var opMaterial = this.materialRepository.findById(id)
+        MaterialModel opMaterial;
+        opMaterial = this.materialRepository.findById(id)
                 .orElseThrow(()-> new MaterialIdNotFoundException(id));
         opMaterial.setUpdateDate(new Date());
         opMaterial.setActive(false);
@@ -85,7 +87,6 @@ public class MaterialServiceImpl implements MaterialService {
         final List<MaterialModel> result = this.materialRepository.findByNameAndActive(descricao);
         if(result.isEmpty()){
             throw new MaterialNotFoundException();
-
         }
         return MaterialConverter.toMaterialList(result);
     }

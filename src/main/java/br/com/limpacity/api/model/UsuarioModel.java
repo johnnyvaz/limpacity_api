@@ -29,6 +29,15 @@ public class UsuarioModel {
     private String nome;
     private String username;
     private String password;
+    private String email;
+    private String cep;
+    private String endereco;
+    private String numero;
+    private String bairro;
+    private String complemento;
+    private String municipio;
+    private String estado;
+    private String pais;
 
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)

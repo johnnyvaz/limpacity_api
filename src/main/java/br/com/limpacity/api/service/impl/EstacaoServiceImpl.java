@@ -2,7 +2,6 @@ package br.com.limpacity.api.service.impl;
 
 import br.com.limpacity.api.converter.EstacaoConverter;
 import br.com.limpacity.api.dto.EstacaoDTO;
-import br.com.limpacity.api.dto.PostoColetaDTO;
 import br.com.limpacity.api.exception.EstacaoNotFoundException;
 import br.com.limpacity.api.model.EstacaoModel;
 import br.com.limpacity.api.repository.EstacaoRepository;
@@ -12,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -21,8 +21,7 @@ public class EstacaoServiceImpl implements EstacaoService {
 
     @Override
     public EstacaoModel create(EstacaoDTO estacao) {
-        EstacaoModel mat = estacaoRepository.save(toDto(estacao));
-        return mat;
+        return estacaoRepository.save(toDto(estacao));
     }
 
     private EstacaoModel toDto(EstacaoDTO est) {
@@ -33,27 +32,27 @@ public class EstacaoServiceImpl implements EstacaoService {
                 .numero(est.getNumero())
                 .bairro(est.getBairro())
                 .complemento(est.getComplemento())
-                .cidade(est.getCidade())
+                .municipio(est.getMunicipio())
                 .estado(est.getEstado())
                 .creationDate(new Date())
                 .active(true)
                 .build();
     }
 
-    @Override
-    public List<EstacaoDTO> findAllAndActive() {
-        final List<EstacaoModel> result = estacaoRepository.findEstacaoAndPosto();
-
-        if(result.isEmpty()){
-            throw new EstacaoNotFoundException();
-        }
-        return EstacaoConverter.toEstacaoList(result);
-    }
+//    @Override
+//    public List<EstacaoDTO> findAllAndActive() {
+//        final List<EstacaoModel> result = estacaoRepository.findEstacaoAndPosto();
+//
+//        if(result.isEmpty()){
+//            throw new EstacaoNotFoundException();
+//        }
+//        return EstacaoConverter.toEstacaoList(result);
+//    }
 
     @Override
     public EstacaoDTO updateEstacao(Long id, EstacaoDTO estacao) {
-        var opEstacao = this.estacaoRepository.findById(id)
-                .orElseThrow(()-> new EstacaoNotFoundException());
+        EstacaoModel opEstacao = this.estacaoRepository.findById(id)
+                .orElseThrow(EstacaoNotFoundException::new);
         Date creationDate =  opEstacao.getCreationDate();
         EstacaoModel est = estacaoRepository.save(toUpdate(id, estacao, creationDate));
         return toEstacao(est);
@@ -67,7 +66,7 @@ public class EstacaoServiceImpl implements EstacaoService {
                 .numero(est.getNumero())
                 .bairro(est.getBairro())
                 .complemento(est.getComplemento())
-                .cidade(est.getCidade())
+                .municipio(est.getMunicipio())
                 .estado(est.getEstado())
                 .build();
     }
@@ -81,7 +80,7 @@ public class EstacaoServiceImpl implements EstacaoService {
                 .numero(est.getNumero())
                 .bairro(est.getBairro())
                 .complemento(est.getComplemento())
-                .cidade(est.getCidade())
+                .municipio(est.getMunicipio())
                 .estado(est.getEstado())
                 .creationDate(creationDate)
                 .updateDate(new Date())
@@ -90,8 +89,8 @@ public class EstacaoServiceImpl implements EstacaoService {
 
     @Override
     public Object inactiveEstacao(Long id) {
-        var opEstacao = this.estacaoRepository.findById(id)
-                .orElseThrow(()-> new EstacaoNotFoundException());
+        EstacaoModel opEstacao = this.estacaoRepository.findById(id)
+                .orElseThrow(EstacaoNotFoundException::new);
         opEstacao.setUpdateDate(new Date());
         opEstacao.setActive(false);
         this.estacaoRepository.save(opEstacao);

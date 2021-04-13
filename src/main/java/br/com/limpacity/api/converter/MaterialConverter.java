@@ -20,7 +20,6 @@ public class MaterialConverter {
         return MaterialDTO.builder()
                 .id(mat.getId())
                 .descricao(mat.getDescricao())
-
                 .active(mat.getActive())
                 .build();
     }

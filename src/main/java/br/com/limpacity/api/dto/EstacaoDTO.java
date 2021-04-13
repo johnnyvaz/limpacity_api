@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.UUID;
 
 @Getter
 @Builder
@@ -13,14 +14,14 @@ import java.util.Date;
 @AllArgsConstructor
 public class EstacaoDTO {
 
-    Long id;
+    UUID uuid;
     String descricao;
     String cep;
     String endereco;
     String numero;
     String bairro;
     String complemento;
-    String cidade;
+    String municipio;
     String estado;
 
 

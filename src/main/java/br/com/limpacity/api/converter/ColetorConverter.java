@@ -16,11 +16,11 @@ public class ColetorConverter {
         return coletor.stream().map(ColetorConverter::toColetor).collect(Collectors.toList());
     }
 
-    private static ColetorDTO toColetor(ColetorModel mat){
+    private static ColetorDTO toColetor(ColetorModel dto){
         return ColetorDTO.builder()
-                .id(mat.getId())
-                .nome(mat.getNome())
-                .active(mat.getActive())
+                .id(dto.getId())
+                .nome(dto.getNome())
+                .active(dto.getActive())
                 .build();
     }
 }
