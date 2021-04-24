@@ -6,6 +6,6 @@ import java.util.UUID;
 
 public interface ColetaQrcodeService {
 
-    ColetaQrcodeModel createQrcode(Long estacao_id);
+    String createQrcode(Long estacao_id);
 
 }

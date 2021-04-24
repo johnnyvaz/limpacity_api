@@ -18,6 +18,6 @@ public class ColetaQrcodeDTO {
     private Boolean ativo;
     private Date creationDate;
     private Date updateDate;
-    private Long estacao_id;
+    private Long posto_id;
 
 }

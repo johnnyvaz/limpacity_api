@@ -26,12 +26,12 @@ public class ColetaQrcodeController extends BaseController {
     @Autowired
     private final ColetaQrcodeService service;
 
-    @GetMapping("/qrcode/{estacao}")
+    @GetMapping("/qrcode/{posto}")
     @Operation(description = "Insere uma nova solicitação de coleta vindo da leitura do QRCode ")
     public ResponseEntity<ResponseBodyDTO<ColetaQrcodeModel>> postColetaQrcode(
-            @PathVariable("estacao") Long estacao_id){
-        logger.info("Solicitação Qrcode : Estacao {} " + estacao_id );
-        return buildResponseBody(service.createQrcode(estacao_id), HttpStatus.OK);
+            @PathVariable("posto") Long posto_id){
+        logger.info("Solicitação Qrcode : Posto {} " + posto_id );
+        return buildResponseBody(service.createQrcode(posto_id), HttpStatus.CREATED);
     }
 
 //    @PostMapping("/qrcode/{estacao}")

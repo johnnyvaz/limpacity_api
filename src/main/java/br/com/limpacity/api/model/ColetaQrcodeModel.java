@@ -25,9 +25,10 @@ public class ColetaQrcodeModel {
     private String uuid;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "estacao_id", foreignKey = @ForeignKey(name = "estacao_coletaqrcode_fk"))
-    private EstacaoModel estacao;
+    @JoinColumn(name = "posto_id", foreignKey = @ForeignKey(name = "posto_coletaqrcode_fk"))
+    private PostoColetaModel posto;
 
+    @Column(name="ativo", columnDefinition = "boolean default true",nullable = false)
     private Boolean ativo;
 
     @CreatedDate
@@ -38,5 +39,15 @@ public class ColetaQrcodeModel {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="update_date")
     private Date updateDate;
+
+    private String error;
+
+    private String integrationStatus;
+
+    private Integer qtdeNotEmail;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name="data_ultimo_email")
+    private Date dataUltimoEmail;
 
 }
