@@ -6,8 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
 
 @Repository
 public interface ColetaQrcodeRepository extends JpaRepository<ColetaQrcodeModel, Long> {
@@ -18,6 +16,11 @@ public interface ColetaQrcodeRepository extends JpaRepository<ColetaQrcodeModel,
 
     @Query(" select m from ColetaQrcodeModel m " +
             " where m.uuid = :uuid ")
-    Optional<ColetaQrcodeModel> findByUuid(UUID uuid);
+    ColetaQrcodeModel findByUuid(String uuid);
+
+    @Query(" select c from ColetaQrcodeModel c where " +
+            " c.ativo = true and " +
+            " c.integrationStatus in ('N', 'R')")
+    List<ColetaQrcodeModel> findAllColetasOpen();
 
 }

@@ -4,7 +4,6 @@ import br.com.limpacity.api.dto.PostoColetaDTO;
 import br.com.limpacity.api.model.PostoColetaModel;
 
 import java.util.List;
-import java.util.UUID;
 
 public interface PostoColetaService {
 

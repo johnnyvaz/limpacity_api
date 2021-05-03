@@ -4,7 +4,6 @@ import br.com.limpacity.api.dto.EstacaoDTO;
 import br.com.limpacity.api.model.EstacaoModel;
 
 import java.util.List;
-import java.util.UUID;
 
 public interface EstacaoService {
 

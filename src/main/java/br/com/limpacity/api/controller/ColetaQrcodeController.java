@@ -2,7 +2,7 @@ package br.com.limpacity.api.controller;
 
 import br.com.limpacity.api.controller.base.BaseController;
 import br.com.limpacity.api.controller.base.ResponseBodyDTO;
-import br.com.limpacity.api.model.ColetaQrcodeModel;
+import br.com.limpacity.api.dto.ColetaQrcodeDTO;
 import br.com.limpacity.api.service.ColetaQrcodeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -11,9 +11,13 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.UUID;
+import javax.validation.Valid;
 
 @RestController
 @AllArgsConstructor
@@ -26,20 +30,14 @@ public class ColetaQrcodeController extends BaseController {
     @Autowired
     private final ColetaQrcodeService service;
 
-    @GetMapping("/qrcode/{posto}")
+    @PostMapping("/qrcode/{posto}")
     @Operation(description = "Insere uma nova solicitação de coleta vindo da leitura do QRCode ")
-    public ResponseEntity<ResponseBodyDTO<ColetaQrcodeModel>> postColetaQrcode(
+    public ResponseEntity<ResponseBodyDTO<ColetaQrcodeDTO>> postColetaQrcode(
+            @Valid @RequestBody ColetaQrcodeDTO coleta,
             @PathVariable("posto") Long posto_id){
         logger.info("Solicitação Qrcode : Posto {} " + posto_id );
-        return buildResponseBody(service.createQrcode(posto_id), HttpStatus.CREATED);
+        return buildResponseBody(service.createQrcode(posto_id, coleta), HttpStatus.CREATED);
     }
 
-//    @PostMapping("/qrcode/{estacao}")
-//    @Operation(description = "Insere uma nova solicitação de coleta vindo da leitura do QRCode ")
-//    public ResponseEntity<ResponseBodyDTO<ColetaQrcodeModel>> postColetaQrcode(
-//            @PathVariable("estacao") Long estacao_id){
-//        logger.info("Solicitação Qrcode : Estacao {} " + estacao_id );
-//        return buildResponseBody(service.createQrcode(estacao_id), HttpStatus.OK);
-//    }
 
 }

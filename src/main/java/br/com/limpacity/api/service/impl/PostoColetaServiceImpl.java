@@ -2,9 +2,7 @@ package br.com.limpacity.api.service.impl;
 
 import br.com.limpacity.api.converter.PostoColetaConverter;
 import br.com.limpacity.api.dto.PostoColetaDTO;
-import br.com.limpacity.api.dto.material.MaterialDTO;
 import br.com.limpacity.api.exception.PostoColetaNotFoundException;
-import br.com.limpacity.api.model.MaterialModel;
 import br.com.limpacity.api.model.PostoColetaModel;
 import br.com.limpacity.api.repository.PostoColetaRepository;
 import br.com.limpacity.api.service.PostoColetaService;
@@ -13,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @AllArgsConstructor

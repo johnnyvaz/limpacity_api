@@ -1,6 +1,6 @@
 package br.com.limpacity.api.controller.advicer;
 
-import br.com.limpacity.api.controller.base.*;
+import br.com.limpacity.api.controller.base.ResponseBodyDTO;
 import br.com.limpacity.api.controller.base.error.ErrorCodeEnum;
 import br.com.limpacity.api.controller.base.error.ErrorDTO;
 import br.com.limpacity.api.controller.base.error.ErrorDTOFactory;

@@ -1,8 +1,6 @@
 package br.com.limpacity.api.converter;
 
-import br.com.limpacity.api.dto.EstacaoDTO;
 import br.com.limpacity.api.dto.PostoColetaDTO;
-import br.com.limpacity.api.dto.material.MaterialDTO;
 import br.com.limpacity.api.model.PostoColetaModel;
 
 import java.util.List;

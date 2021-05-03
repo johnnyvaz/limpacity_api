@@ -1,8 +1,5 @@
 package br.com.limpacity.api.controller.base.error;
 
-import br.com.limpacity.api.controller.base.error.ErrorCodeEnum;
-import br.com.limpacity.api.controller.base.error.ErrorDTO;
-
 public class ErrorDTOFactory {
     public ErrorDTOFactory() {
     }
