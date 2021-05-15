@@ -21,8 +21,8 @@ import javax.validation.Valid;
 
 @RestController
 @AllArgsConstructor
-@Tag(name = "ColetaController", description = " Repositório das coletas solicitadas")
-@RequestMapping(value = "/api/v1/coleta")
+@Tag(name = "ColetaQrcodeController", description = " Repositório das coletas solicitadas")
+@RequestMapping(value = "/api/v1")
 public class ColetaQrcodeController extends BaseController {
 
     private final Logger logger = Logger.getLogger(ColetaQrcodeController.class);
@@ -39,5 +39,21 @@ public class ColetaQrcodeController extends BaseController {
         return buildResponseBody(service.createQrcode(posto_id, coleta), HttpStatus.CREATED);
     }
 
+    @PostMapping("/aceite/{uuid}")
+    @Operation(description = "Insere o UUID com uma resposta do aceite")
+    public ResponseEntity<ResponseBodyDTO<ColetaQrcodeDTO>> aceiteColeta(
+            @Valid @RequestBody ColetaQrcodeDTO coleta,
+            @PathVariable("posto") Long posto_id){
+        logger.info("Solicitação Qrcode : Posto {} " + posto_id );
+        return buildResponseBody(service.createQrcode(posto_id, coleta), HttpStatus.CREATED);
+    }
 
+//    @GetMapping("/coletar/{uuid}")
+//    @Operation(description = "Insere uma nova solicitação de coleta vindo da leitura do QRCode ")
+//    public ResponseEntity<ResponseBodyDTO<ColetaQrcodeDTO>> aceiteColeta(
+//            @Valid @RequestBody ColetaQrcodeDTO coleta,
+//            @PathVariable("posto") Long posto_id){
+//        logger.info("Solicitação Qrcode : Posto {} " + posto_id );
+//        return buildResponseBody(service.createQrcode(posto_id, coleta), HttpStatus.CREATED);
+//    }
 }

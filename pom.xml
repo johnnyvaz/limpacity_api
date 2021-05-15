@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>br.com.limpacity</groupId>
-    <artifactId>api</artifactId>
+    <artifactId>limpacity_api</artifactId>
     <version>0.0.1</version>
     <name>api</name>
     <description>micro serviço para gestao de residuos</description>

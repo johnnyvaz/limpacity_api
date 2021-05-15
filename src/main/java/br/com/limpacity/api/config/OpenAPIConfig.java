@@ -24,8 +24,10 @@ public class OpenAPIConfig {
                         .addSecuritySchemes(API_KEY, apiKeySecuritySchema()))
                 .info(new Info()
                         .title("Limpa City API")
-                        .description("API para consulta e gravação dos dados diretamente no banco " +
-                                "de dados, de forma síncrona ")
+                        .description("A API recebe os dados e insere no banco, e nela também existem algumas regras do " +
+                        "negócio para manter a integridade dos dados. Embora a solicitação de coleta passa pela fila, " +
+                        "na API também é possível inserir essas informações de forma síncrona, isso porque este sistema " +
+                        "é que faz a interface com o banco de dados. ")
                         .version(appVersion))
                 .security(Collections.singletonList(new SecurityRequirement().addList(API_KEY)));
     }
